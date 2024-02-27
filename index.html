@@ -30,22 +30,44 @@
                     
                 </div>
             </div>
-            <div id="divRegister" class="card-12 col-md-11 col-lg-10" style="display:none;" data-card="register">
+            <div id="divRegister" class="card-12 col-md-11 col-lg-10" style="display:none;">
                 <div class="card-header">
+                    <h1 class="text-center">Registration</h1>
+                </div>
+                <div class="card-body">
                     <form>
                         <div class="form-group">
-                            <label for="txtEmail" class="form-label">Email</label>
-                            <input id="txtEmail" class="form-control" type="text" placeholder="Enter email" aria-label="Email">                            
+                            <label for="txtRegisterEmail" class="form-label">Email</label>
+                            <input id="txtRegisterEmail" class="form-control" type="email" placeholder="Enter email" aria-label="Email">                            
                         </div>
                         <div class="form-group">
-                            <label for="txtPassword" class="form-label">Password</label>
-                            <input id="txtPassword" class="form-cotrol" type="password" placeholder="Enter password" aria-label="Password">""
+                            <label for="txtRegisterPassword" class="form-label">Password</label>
+                            <input id="txtRegisterPassword" class="form-cotrol" type="password" placeholder="Enter password" aria-label="Password">
                         </div>
-
                         <div class="form-group">
-                            <label for="txtState" class="form-label">State</label>
+                            <label for="txtRegisterFirstName" class="form-label">First Name</label>
+                            <input id="txtRegisterFirstName" class="form-control" type="text" placeholder="Enter first name" aria-label="First Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtRegisterLastName" class="form-label">Last Name</label>
+                            <input id="txtRegisterLastName" class="form-control" type="text" placeholder="Enter last name" aria-label="Last Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtRegisterStreetAddress1" class="form-label">Street Address 1</label>
+                            <input id="txtRegisterStreetAddress1" class="form-control" type="text" placeholder="Enter street address 1" aria-label="Street Address 1">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtRegisterStreetAddress2" class="form-label">Street Address 2</label>
+                            <input id="txtRegisterStreetAddress2" class="form-control" type="text" placeholder="Enter street address 2" aria-label="Street Address 2">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtRegisterCity" class="form-label">City</label>
+                            <input id="txtRegisterCity" class="form-control" type="text" placeholder="Enter city" aria-label="City">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtRegisterState" class="form-label">State</label>
                             <br>
-                            <select id="txtState"> 
+                            <select id="txtRegisterState"> 
                                 <option value="" selected="selected">Select a State</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -99,9 +121,23 @@
                                 <option value="WI">Wisconsin</option>
                                 <option value="WY">Wyoming</option>
                             </select>
-
-                        </div>div></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="txtRegisterZIP" class="form-label">ZIP Code</label>
+                            <input id="txtRegisterZIP" class="form-control" type="text" placeholder="Enter ZIP code" aria-label="Zip Code">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtRegisterPhone" class="form-label">Phone Number</label>
+                            <input id="txtRegisterPhone" class="form-control" type="tel" placeholder="Enter phone number" aria-label="Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="txtRegisterCoopID" class="form-label">Coop Registration ID</label>
+                            <input id="txtRegisterCoopID" class="form-control" type="text" placeholder="Enter coop registration ID" aria-label="Coop Registration ID">
+                        </div>
                         <button class="btn btn-primary col-12" type="button" id="btnRegister">Register</button>
+                        <div class="col-12 d-flex justify-content-center">
+                            <a class="col-12 text-center btnToggle" data-card="register">Return to Login</a>
+                        </div>
                     </form>
                 </div>
             </div>
