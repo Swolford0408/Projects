@@ -15,3 +15,21 @@ $('.btnRegister').on('click',function(){
         });
     }
 });
+
+$('.btnToRegister').on('click',function(){
+    let strCard = $(this).attr('data-card')
+    if(strCard == "register"){
+        $('#divLogin').slideToggle(function(){
+            $('#divRegister').slideToggle();
+        });
+    };
+});
+
+$('.btnBackLogin').on('click',function(){
+    let strCard = $(this).attr('data-card')
+    if(strCard == "login"){
+        $('#divRegister').slideToggle(function(){
+            $('#divLogin').slideToggle();
+        });
+    };
+});

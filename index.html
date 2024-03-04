@@ -25,7 +25,8 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary col-12" type="button" id="btnLogin">Login</button> 
+                        <button class="btn btn-primary col-12" type="button" id="btnLogin" data-card="login">Login</button> 
+                        <button class="btn btn-secondary col-12" type="button" id="btnToRegister" data-card="register">Go to Registration</button>
                     </form>
                     
                 </div>
@@ -134,9 +135,9 @@
                             <label for="txtRegisterCoopID" class="form-label">Coop Registration ID</label>
                             <input id="txtRegisterCoopID" class="form-control" type="text" placeholder="Enter coop registration ID" aria-label="Coop Registration ID">
                         </div>
-                        <button class="btn btn-primary col-12" type="button" id="btnRegister">Register</button>
+                        <button class="btn btn-primary col-12" type="button" id="btnRegister" data-card="register">Register</button>
                         <div class="col-12 d-flex justify-content-center">
-                            <a class="col-12 text-center btnToggle" data-card="register">Return to Login</a>
+                            <button class="btn btn-secondary col-12" type="button" id="btnBackLogin" data-card="login">Back to Login</button>
                         </div>
                     </form>
                 </div>
@@ -149,6 +150,43 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         
         <script src="./validation.js"></script>
-        <script src="./toggle.js"></script>
+        <script>
+
+        $('#btnLogin').on('click',function(){
+            let strCard = $(this).attr('data-card')
+            if(strCard == "login"){
+                $('#divLogin').slideToggle(function(){
+                    $('#divDashboard').slideToggle();
+                });
+            }
+        });
+        
+        $('#btnRegister').on('click',function(){
+            let strCard = $(this).attr('data-card')
+            if(strCard == "register"){
+                $('#divRegister').slideToggle(function(){
+                    $('#divDashboard').slideToggle();
+                });
+            }
+        });
+        
+        $('#btnToRegister').on('click',function(){
+            let strCard = $(this).attr('data-card')
+            if(strCard == "register"){
+                $('#divLogin').slideToggle(function(){
+                    $('#divRegister').slideToggle();
+                });
+            };
+        });
+        
+        $('#btnBackLogin').on('click',function(){
+            let strCard = $(this).attr('data-card')
+            if(strCard == "login"){
+                $('#divRegister').slideToggle(function(){
+                    $('#divLogin').slideToggle();
+                });
+            };
+        });
+        </script>
     </body>
 </html>
