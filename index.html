@@ -6,8 +6,8 @@
         <title>SmartCoop</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
-    <body class="bg-dark">
-        <div class="col-12 d-flex justify-content-center align-items-center vh-100">
+    <body class="bg-success">
+        <div id="divMain" class="col-12 d-flex justify-content-center align-items-center vh-100">
             <!-- LOGIN CARD -->
             <div id="divLogin" class="card col-12 col-md-5 col-lg-4" data-card="login">
                 <div class="card-header">
@@ -26,8 +26,10 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary col-12" type="button" id="btnLogin" data-card="login">Login</button> 
-                        <button class="btn btn-secondary col-12" type="button" id="btnToRegister" data-card="register">Go to Registration</button>
+                        <button class="btn btn-primary col-12" type="button" id="btnLogin">Login</button> 
+                        <div class="col-12 d-flex justify-content-center">
+                            <a class="col-12 text-center btnToggle" data-card="Login">Need to Register? Click Here</a> 
+                        </div>
                     </form>
                     
                 </div>
@@ -39,39 +41,37 @@
                     <h1 class="text-center">Registration</h1>
                 </div>
                 <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="txtRegisterEmail" class="form-label">Email</label>
-                            <input id="txtRegisterEmail" class="form-control" type="email" placeholder="Enter email" aria-label="Email">                            
+                    <form class="row g-3">
+                        <div class="form-floating col-md-6">
+                            <input id="txtRegisterEmail" class="form-control" type="email" placeholder="Enter email" aria-label="Email">  
+                            <label for="txtRegisterEmail" class="form-label">Email</label>                          
                         </div>
-                        <div class="form-group">
+                        <div class="form-floating col-md-6">
+                            <input id="txtRegisterPassword" class="form-control" type="password" placeholder="Password" aria-label="Password">
                             <label for="txtRegisterPassword" class="form-label">Password</label>
-                            <input id="txtRegisterPassword" class="form-control" type="password" placeholder="Enter password" aria-label="Password">
                         </div>
-                        <div class="form-group">
-                            <label for="txtRegisterFirstName" class="form-label">First Name</label>
+                        <div class="form-floating col-md-6">
                             <input id="txtRegisterFirstName" class="form-control" type="text" placeholder="Enter first name" aria-label="First Name">
+                            <label for="txtRegisterFirstName" class="form-label">First Name</label>
                         </div>
-                        <div class="form-group">
-                            <label for="txtRegisterLastName" class="form-label">Last Name</label>
+                        <div class="form-floating col-md-6">
                             <input id="txtRegisterLastName" class="form-control" type="text" placeholder="Enter last name" aria-label="Last Name">
+                            <label for="txtRegisterLastName" class="form-label">Last Name</label>
                         </div>
-                        <div class="form-group">
-                            <label for="txtRegisterStreetAddress1" class="form-label">Street Address 1</label>
+                        <div class="form-floating col-md-6">
                             <input id="txtRegisterStreetAddress1" class="form-control" type="text" placeholder="Enter street address 1" aria-label="Street Address 1">
+                            <label for="txtRegisterStreetAddress1" class="form-label">Street Address 1</label>
                         </div>
-                        <div class="form-group">
-                            <label for="txtRegisterStreetAddress2" class="form-label">Street Address 2</label>
+                        <div class="form-floating col-md-6">
                             <input id="txtRegisterStreetAddress2" class="form-control" type="text" placeholder="Enter street address 2" aria-label="Street Address 2">
+                            <label for="txtRegisterStreetAddress2" class="form-label">Street Address 2</label>
                         </div>
-                        <div class="form-group">
-                            <label for="txtRegisterCity" class="form-label">City</label>
+                        <div class="form-floating col-md-4">
                             <input id="txtRegisterCity" class="form-control" type="text" placeholder="Enter city" aria-label="City">
+                            <label for="txtRegisterCity" class="form-label">City</label>
                         </div>
-                        <div class="form-group">
-                            <label for="txtRegisterState" class="form-label">State</label>
-                            <br>
-                            <select id="txtRegisterState"> 
+                        <div class="form-floating col-md-4">
+                            <select id="txtRegisterState" class="form-select" placeholder="Select a State" aria-label="Select a State"> 
                                 <option value="" selected="selected">Select a State</option>
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
@@ -125,22 +125,23 @@
                                 <option value="WI">Wisconsin</option>
                                 <option value="WY">Wyoming</option>
                             </select>
+                            <label for="txtRegisterState" class="form-label">State</label>
                         </div>
-                        <div class="form-group">
-                            <label for="txtRegisterZIP" class="form-label">ZIP Code</label>
+                        <div class="form-floating col-4">
                             <input id="txtRegisterZIP" class="form-control" type="text" placeholder="Enter ZIP code" aria-label="Zip Code">
+                            <label for="txtRegisterZIP" class="form-label">ZIP Code</label>
                         </div>
-                        <div class="form-group">
-                            <label for="txtRegisterPhone" class="form-label">Phone Number</label>
+                        <div class="form-floating col-6">
                             <input id="txtRegisterPhone" class="form-control" type="tel" placeholder="Enter phone number" aria-label="Phone Number">
+                            <label for="txtRegisterPhone" class="form-label">Phone Number</label>
                         </div>
-                        <div class="form-group">
-                            <label for="txtRegisterCoopID" class="form-label">Coop Registration ID</label>
+                        <div class="form-floating col-6">
                             <input id="txtRegisterCoopID" class="form-control" type="text" placeholder="Enter coop registration ID" aria-label="Coop Registration ID">
+                            <label for="txtRegisterCoopID" class="form-label">Coop Registration ID</label>
                         </div>
-                        <button class="btn btn-primary col-12" type="button" id="btnRegister" data-card="register">Register</button>
+                        <button class="btn btn-primary col-12" type="button" id="btnRegister">Register</button>
                         <div class="col-12 d-flex justify-content-center">
-                            <button class="btn btn-secondary col-12" type="button" id="btnBackLogin" data-card="login">Back to Login</button>
+                            <a class="col-12 text-center btnToggle" data-card="Register">Already have an Acccount? Click Here</a> 
                         </div>
                     </form>
                 </div>
@@ -155,44 +156,37 @@
         <script>
 
         $('#btnLogin').on('click',function(){
-            let strCard = $(this).attr('data-card')
             if(!validateLogin()){
-                if(strCard == "login"){
-                    $('#divLogin').slideToggle(function(){
-                        $('#divDashboard').slideToggle();
-                    });
-                }
+              $('#divLogin').slideToggle(function(){
+                  $('#divDashboard').slideToggle();
+              })
             }
         });
         
         $('#btnRegister').on('click',function(){
-            let strCard = $(this).attr('data-card')
             if(!validateRegistration()){
-                if(strCard == "register"){
-                    $('#divRegister').slideToggle(function(){
-                        $('#divDashboard').slideToggle();
-                    });
-                }
+              $('#divRegister').slideToggle(function(){
+                      $('#divDashboard').slideToggle();
+              });
             }
         });
         
-        $('#btnToRegister').on('click',function(){
-            let strCard = $(this).attr('data-card')
-            if(strCard == "register"){
+        $('.btnToggle').on('click',function(){
+            let strCard = $(this).attr('data-card');
+            if(strCard == 'Login'){
                 $('#divLogin').slideToggle(function(){
                     $('#divRegister').slideToggle();
-                });
-            };
-        });
-        
-        $('#btnBackLogin').on('click',function(){
-            let strCard = $(this).attr('data-card')
-            if(strCard == "login"){
+                })
+                if($(window).width() < 720){
+                    $('#divMain').removeClass('vh-100');
+                }
+            } else {
                 $('#divRegister').slideToggle(function(){
                     $('#divLogin').slideToggle();
-                });
-            };
-        });
+                })
+                $('#divMain').addClass('vh-100');
+            }
+        })
         </script>
     </body>
 </html>
