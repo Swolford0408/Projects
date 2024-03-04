@@ -7,7 +7,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </head>
     <body class="bg-success">
-        <div class="col-12 d-flex justify-content-center align-items-center">
+        <div id="divMain" class="col-12 d-flex justify-content-center align-items-center vh-100">
             <div id="divLogin" class="card col-12 col-md-5 col-lg-4" data-card="login">
                 <div class="card-header">
                     <h1 class="text-center">Login</h1>
@@ -130,7 +130,7 @@
                         </div>
                         <div class="form-floating col-6">
                             <input id="txtRegisterPhone" class="form-control" type="tel" placeholder="Enter phone number" aria-label="Phone Number">
-                            <label for="txtRegisterZIP" class="form-label">ZIP Code</label>
+                            <label for="txtRegisterPhone" class="form-label">Phone Number</label>
                         </div>
                         <div class="form-floating col-6">
                             <input id="txtRegisterCoopID" class="form-control" type="text" placeholder="Enter coop registration ID" aria-label="Coop Registration ID">
@@ -171,10 +171,14 @@
                 $('#divLogin').slideToggle(function(){
                     $('#divRegister').slideToggle();
                 })
+                if($(window).width() < 720){
+                    $('#divMain').removeClass('vh-100');
+                }
             } else {
                 $('#divRegister').slideToggle(function(){
                     $('#divLogin').slideToggle();
                 })
+                $('#divMain').addClass('vh-100');
             }
         })
         </script>
