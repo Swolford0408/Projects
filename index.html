@@ -8,6 +8,7 @@
     </head>
     <body class="bg-dark">
         <div class="col-12 d-flex justify-content-center align-items-center vh-100">
+            <!-- LOGIN CARD -->
             <div id="divLogin" class="card col-12 col-md-5 col-lg-4" data-card="login">
                 <div class="card-header">
                     <h1 class="text-center">Login</h1>
@@ -31,6 +32,8 @@
                     
                 </div>
             </div>
+
+            <!-- REGISTER CARD -->
             <div id="divRegister" class="card col-12 col-md-11 col-lg-10" style="display:none;">
                 <div class="card-header">
                     <h1 class="text-center">Registration</h1>
@@ -148,25 +151,28 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
         <script src="./validation.js"></script>
         <script>
 
         $('#btnLogin').on('click',function(){
             let strCard = $(this).attr('data-card')
-            if(strCard == "login"){
-                $('#divLogin').slideToggle(function(){
-                    $('#divDashboard').slideToggle();
-                });
+            if(!validateLogin()){
+                if(strCard == "login"){
+                    $('#divLogin').slideToggle(function(){
+                        $('#divDashboard').slideToggle();
+                    });
+                }
             }
         });
         
         $('#btnRegister').on('click',function(){
             let strCard = $(this).attr('data-card')
-            if(strCard == "register"){
-                $('#divRegister').slideToggle(function(){
-                    $('#divDashboard').slideToggle();
-                });
+            if(!validateRegistration()){
+                if(strCard == "register"){
+                    $('#divRegister').slideToggle(function(){
+                        $('#divDashboard').slideToggle();
+                    });
+                }
             }
         });
         
