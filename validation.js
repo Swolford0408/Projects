@@ -58,7 +58,7 @@ const validateRegistration = ()=>{
     //////////////////////////
 
     if(!emailRegEx.test(strEmail)) resultStr += '<p>Invalid Email</p>';    
-    if(!passwordRegEx.test(strPassword)) resultStr += '<p>Invalid Password. Must be at least 8 characters with at least one digit.</p>'; 
+    if(strPassword.length < 8) resultStr += '<p>Invalid Password. Must be at least 8 characters.</p>'; 
 
     if(strFirstName.length < 1) resultStr += '<p>First Name must have a at least one character.</p>';
     if(strLastName.length < 1) resultStr += '<p>Last Name must have at least one character.</p>';
@@ -95,7 +95,7 @@ const validateLogin = ()=>{
     const passwordRegEx = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
 
     if(strLoginUsername.length < 1) resultStr += '<p>Username must be filled out.</p>';
-    if(!passwordRegEx.test(strLoginPassword)) resultStr += '<p>Invalid Password. Must be at least 8 characters with at least one digit.</p>';
+    if(strLoginPassword.length < 8) resultStr += '<p>Invalid Password. Must be at least 8 characters.</p>';
 
     // If error was found, print sweet alert
     if(resultStr){
