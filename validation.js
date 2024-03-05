@@ -24,28 +24,12 @@ const validateRegistration = ()=>{
     const strZip = $('#txtRegisterZIP').val();
     const strPhone = $('#txtRegisterPhone').val();
     const strCoopId = $('#txtRegisterCoopID').val();
-    
-    // console.log(strEmail);
-    // console.log(strPassword);
-    // console.log(strFirstName);
-    // console.log(strLastName);
-    // console.log(strAddressOne);
-    // console.log(strAddressTwo);
-    // console.log(strCity);
-    // console.log(strState);
-    // console.log(strZip);
-    // console.log(strPhone);
-    // console.log(strCoopId);
 
     // Return value
     let resultStr = '';
 
     // REGEX      
     const emailRegEx = new RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-
-    // Minimum eight characters, at least one letter and one number:
-    // https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
-    const passwordRegEx = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
 
     // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s14.html
     const zipCodeRegEx = new RegExp("^[0-9]{5}(?:-[0-9]{4})?$");
@@ -90,9 +74,6 @@ const validateLogin = ()=>{
     const strLoginPassword = $('#txtLoginPassword').val();
 
     let resultStr = '';
-    // Minimum eight characters, at least one letter and one number:
-    // https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a
-    const passwordRegEx = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$");
 
     if(strLoginUsername.length < 1) resultStr += '<p>Username must be filled out.</p>';
     if(strLoginPassword.length < 8) resultStr += '<p>Invalid Password. Must be at least 8 characters.</p>';
