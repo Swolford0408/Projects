@@ -75,7 +75,9 @@ const validateLogin = ()=>{
 
     let resultStr = '';
 
-    if(strLoginUsername.length < 1) resultStr += '<p>Username must be filled out.</p>';
+    const emailRegEx = new RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+
+    if(emailRegEx.test(strLoginUsername)) resultStr += '<p>Email is invalid.</p>';
     if(strLoginPassword.length < 8) resultStr += '<p>Invalid Password. Must be at least 8 characters.</p>';
 
     // If error was found, print sweet alert
