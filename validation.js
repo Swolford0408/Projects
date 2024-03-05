@@ -33,18 +33,14 @@ const validateRegistration = ()=>{
         // CHECKS
 //////////////////////////        ////////////////////////////////////////////////////
     if(!emailRegEx.test(txtEmail)){        resultStr += '<p>Invalid Email</p>';l    }
-:
+;
     if(!passwordRegEx.test(txtPassword)){
 
           resultStr += '<p>Invalid Password</p>';  }
    
  return resultStr
 }
-;RegEx.test(txtEmail)){
-
-
-    }
-};
+;
 
 const validateLogin = ()=>{
 
