@@ -77,7 +77,7 @@ const validateLogin = ()=>{
 
     const emailRegEx = new RegExp("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
 
-    if(emailRegEx.test(strLoginUsername)) resultStr += '<p>Email is invalid.</p>';
+    if(!emailRegEx.test(strLoginUsername)) resultStr += '<p>Email is invalid.</p>';
     if(strLoginPassword.length < 8) resultStr += '<p>Invalid Password. Must be at least 8 characters.</p>';
 
     // If error was found, print sweet alert
