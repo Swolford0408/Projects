@@ -53,7 +53,14 @@ const validateRegistration = ()=>{
     if(!zipCodeRegEx.test(strZip)) resultStr += '<p>Invalid Zip Code</p>';
     if(!phoneRegEx.test(strPhone)) resultStr += '<p>Invalid telephone number.</p>';
 
-    if(strCoopId.length < 1) resultStr += '<p>Coop ID needs filled out</p>';
+    if(strCoopId.length < 1){
+        $('#txtRegisterCoopID').val(function(){
+            $.post('https://simplecoop.swollenhippo.com/coop.php',function(objCoopID){
+                objCoopID = JSON.parse(objCoopID)
+                return objCoopID.CoopID;
+            })
+        });
+    };
 
     // If error was found, print sweet alert
     if(resultStr){
