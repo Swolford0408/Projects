@@ -2,7 +2,19 @@
             let strEmail = $('#txtLoginUserName').val();
             let strPassword = $('#txtLoginPassword').val();
             if(!validateLogin()){
-                createSession(strEmail,strPassword, "login");
+                // check if the email has an account first
+                $.getJSON('https://simplecoop.swollenhippo.com/users.php',{Email:strEmail}, function(result){
+                    if(result){
+                        // create session
+                        createSession(strEmail,strPassword, "login");
+                    } else{
+                        Swal.fire({
+                            icon:'error',
+                            title:'Oops',
+                            html: 'This email doesnt have an account'
+                        })
+                    }
+                })
             }
         });
         
@@ -19,15 +31,29 @@
                 let strZip = $('#txtRegisterZIP').val();
                 let strPhone = $('#txtRegisterPhone').val();
                 let strCoopID = $('#txtRegisterCoopID').val();
-                // create user
-                $.post('https://simplecoop.swollenhippo.com/users.php',{Email:strEmail,Password:strPassword,FirstName:strFirstName,LastName:strLastName,CoopID:strCoopID},function(result){
-                    result=JSON.parse(result);
-                    if(!result.error){
-                        console.log(result);
-                        // create Session
-                        createSession(strEmail, strPassword, "register");
+
+                // check if user already exist
+                $.getJSON('https://simplecoop.swollenhippo.com/users.php',{Email:strEmail}, function(result){
+                    if(!result){
+                        $.post('https://simplecoop.swollenhippo.com/users.php',{Email:strEmail,Password:strPassword,FirstName:strFirstName,LastName:strLastName,CoopID:strCoopID},function(result){
+                            result=JSON.parse(result);
+                            if(result.Outcome == 'New User Created'){
+                                // create Session
+                                createSession(strEmail, strPassword, "register");
+                            }
+                        })
+                        $.post('https://simplecoop.swollenhippo.com/useraddress.php',{Email:strEmail,Street1:strAddressOne,Street2:strAddressTwo,City:strCity,State:strState,ZIP:strZip},function(result){
+                            result=JSON.parse(result);
+                        })
+                    } else{
+                        Swal.fire({
+                            icon:'error',
+                            title:'Oops',
+                            html: 'This email already has an account'
+                        })
                     }
                 })
+
             }
         });
         
