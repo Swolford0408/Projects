@@ -26,9 +26,10 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary col-12" type="button" id="btnLogin">Login</button> 
+                        <button class="btn btn-primary col-12" type="button" id="btnLogin">Login</button>
+                        <button class="btn btn-primary col-12 mt-2" type="button" id="btnDevLogin">DEV Login</button> 
                         <div class="col-12 d-flex justify-content-center">
-                            <a class="col-12 text-center btnToggle" data-card="Login">Need to Register? Click Here</a> 
+                            <a class="col-12 text-center btnToggle" data-card="Login"><span style="cursor:pointer">Need to Register? Click Here</span></a> 
                         </div>
                     </form>
                     
@@ -152,6 +153,10 @@
             </div>
             <div id="divDashboard" class="card" style="display: none;" data-card="dashboard">
                 <button class="btn btn-danger col-12" type="button" id="btnLogOut">Log Out</button>
+                <button class="btn btn-primary col-12" type="button" id="settingsToggleOn">Settings</button>
+            </div>
+            <div id="divSettings" class="card d-none" data-card="settings">
+
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -160,5 +165,6 @@
         <script src="./validation.js"></script>
         <script src="./toggle.js"></script>
         <script src="./sessions.js"></script>
+        <script src="./settings.js"></script>
     </body>
 </html>
