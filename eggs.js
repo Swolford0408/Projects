@@ -11,4 +11,19 @@ function getRandomObservationDatetime() {
     return observationDatetime;
 }
 
-// TODO use $('#numTotalEggs').text(someNumber); to change <p>
+// use $('#numTotalEggs').text(someNumber); to change <p>
+
+$.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), days:100}, function(result) {
+    console.log(result);
+})
+
+$('#btnHarvest').on('click', function() {
+    let intEggHarvest = $('#numEggHarvest').val();
+
+    if (intEggHarvest) {
+        $.post('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), observationDateTime:getRandomObservationDatetime(), eggs:intEggHarvest}, function(result) {
+            result = JSON.parse(result);
+            console.log(result);
+        })
+    }
+})
