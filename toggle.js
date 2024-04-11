@@ -83,3 +83,10 @@
                 console.log("Failed to logout")
             }
         })
+
+        $('#btnGenerateCoopID').on('click',function(){
+            $.post('https://simplecoop.swollenhippo.com/coop.php',function(objCoopID){
+                objCoopID = JSON.parse(objCoopID)
+                $('#txtRegisterCoopID').val(objCoopID.CoopID);
+            });
+        })
