@@ -108,9 +108,8 @@ function getEnv(d){
                 html: 'Error requesting Data'
             })
         }
-        return true;
+        return;
     });
-    return true;
 }
 
 $('#btnDeleteEnv').on('click',function(){
