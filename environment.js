@@ -75,7 +75,6 @@ function getEnv(d){
                 let strHTML = 
                 '<tr data-id="' + element.LogID + '" class="table-success">' + 
                     '<td>' +  element.ObservationDateTime +
-
                     ' </td>' +
                     '<td>' +
                         '<div class="progress">' +
@@ -88,7 +87,7 @@ function getEnv(d){
                         '</div>' +
                     '</td>' +
                     '<td>' + 
-                        '<button id="btnDeleteEnv" class="btn btn-danger bi-trash" type="button"></button>' +
+                        '<button class="btn btn-danger bi-trash" type="button" onclick="deleteData(this)"></button>' +
                     '</td>' +
                     
                 '</tr>';
@@ -99,7 +98,7 @@ function getEnv(d){
                 $('#tblEnv').dataTable();
             });  
             
-
+            return;
                   
         }else {
             Swal.fire({
@@ -107,13 +106,19 @@ function getEnv(d){
                 title:'Oops',
                 html: 'Error requesting Data'
             })
+            return;
         }
-        return;
     });
 }
 
-$('#btnDeleteEnv').on('click',function(){
-    console.log('delete clicked')
+function deleteData(button) { 
+            
+    // Get the parent row of the clicked button 
+    let row = button.parentNode.parentNode; 
+
+    // Remove the row from the table 
+    row.parentNode.removeChild(row); 
+
     session = sessionStorage.getItem('SessionID');
     id = $(this).data('id')
     $.ajax({
@@ -122,8 +127,7 @@ $('#btnDeleteEnv').on('click',function(){
         type: 'DELETE',
         success: function(result){
             console.log(result.Outcome);
-            $(this).parent().delete();
-            $("#tblEnv").ajax.reload();
+            // $("#tblEnv").ajax.reload();
         },
         error: function(result){
             Swal.fire({
@@ -133,10 +137,17 @@ $('#btnDeleteEnv').on('click',function(){
             })
         }
     })
+}
+
+$('#btnDeleteEnv').on('click',function(){
+    console.log('delete clicked')
+    
 });
 
 // creates table and displays it 
 getEnv(100)
+
+//make sure to call the getEnv() function when dashboard is first loaded 
 
 // $('#btnEnvGet').on('click',function(){
 //     $('#tblEnv tbody').empty()
