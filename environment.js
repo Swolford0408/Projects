@@ -63,53 +63,83 @@ $('#btnEnvAdd').on('click',function(){
     }
 
 })
+
+// pulls all logs and turns them into a data table
 function getEnv(d){
     session = sessionStorage.getItem('SessionID');
-    $.get('https://simplecoop.swollenhippo.com/environment.php',{SessionID: session, days: d},function(result){
-    console.log(result)
-    // if(result.Outcome != false){
-    //     // let strHTML = 
-    //     // '<tr id="tr' + task.TaskID + '">' + 
-    //     //     '<td>' +  task.TaskName + '</td>' +
-    //     //     '<td>' +  task.DueDate + '</td>' +
-    //     //     '<td>' +  task.Location + '</td>' +
-    //     //     '<td>' +  task.Instructions + '</td>' +
-    //     //     '<td>' + 
-    //     //     '<div class="d-flex justify-content-end">' +  
-    //     //         '<button id="btnDelete" data-search="' + task.TaskID + '"class="btn btn-danger" type="button">Delete</button>' + 
-    //     //     '</div>' +
-    //     //     '</td>' +
-    //     // '</tr>';
-    //     }
+    $.getJSON('https://simplecoop.swollenhippo.com/environment.php',{SessionID: session, days: d},function(result){
+        console.log(result)
+        if(result.Outcome != false){
+            // loops through all logs and puts them into a table 
+            result.forEach(element => {
+                let strHTML = 
+                '<tr data-id="' + element.LogID + '" class="table-success">' + 
+                    '<td>' +  element.ObservationDateTime +
 
+                    ' </td>' +
+                    '<td>' +
+                        '<div class="progress">' +
+                            '<div class="progress-bar bg-danger" role="progressbar" style="width: '+ element.Temperature + '% " aria-valuenow="'+ element.Temperature + '" aria-valuemin="0" aria-valuemax="100">'+ element.Temperature + '&deg' +'</div>' +
+                        '</div>' + 
+                    '</td>' +
+                    '<td>' + 
+                        '<div class="progress">' +
+                            '<div class="progress-bar" role="progressbar" style="width: '+ element.Humidity + '% " aria-valuenow="'+ element.Humidity + '" aria-valuemin="0" aria-valuemax="100">'+ element.Humidity + '%' +'</div>' +
+                        '</div>' +
+                    '</td>' +
+                    '<td>' + 
+                        '<button id="btnDeleteEnv" class="btn btn-danger bi-trash" type="button"></button>' +
+                    '</td>' +
+                    
+                '</tr>';
+                $('#tblEnv tbody').append(strHTML)
+            });
+            // turns table into a data table to get the pages/search/# of results 
+            $(document).ready(function(){
+                $('#tblEnv').dataTable();
+            });  
+            
+
+                  
+        }else {
+            Swal.fire({
+                icon:'error',
+                title:'Oops',
+                html: 'Error requesting Data'
+            })
+        }
+        return true;
     });
-
+    return true;
 }
 
+$('#btnDeleteEnv').on('click',function(){
+    console.log('delete clicked')
+    session = sessionStorage.getItem('SessionID');
+    id = $(this).data('id')
+    $.ajax({
+        url:'https://simplecoop.swollenhippo.com/environment.php',
+        data: {SessionID:session, LogID:id },
+        type: 'DELETE',
+        success: function(result){
+            console.log(result.Outcome);
+            $(this).parent().delete();
+            $("#tblEnv").ajax.reload();
+        },
+        error: function(result){
+            Swal.fire({
+                icon:'error',
+                title:'Oops',
+                html: 'Error Deleting Data' + result.Outcome
+            })
+        }
+    })
+});
 
-$('#btnEnvGet').on('click',function(){
-    console.log('hello')
-    getEnv(48)
-})
+// creates table and displays it 
+getEnv(100)
 
-
-
-// arrTasks.forEach(function(task){
-//     $('#tblTasks tbody').append(
-//         '<tr id="tr' + task.TaskID + '">' + 
-//             '<td><input id="checkBox' + task.TaskID + '" data-search="' + task.TaskID + '" class="form-check-input" type="checkbox" value=""' + task.Status + '></td>' +
-//             '<td>' +  task.TaskName + '</td>' +
-//             '<td>' +  task.DueDate + '</td>' +
-//             '<td>' +  task.Location + '</td>' +
-//             '<td>' +  task.Instructions + '</td>' +
-//             '<td>' + 
-//                 '<div class="d-flex justify-content-end">' +  
-//                     '<button id="btnEdit" data-search="' + task.TaskID + '"class="btn btn-secondary me-2" type="button">Edit</button>' +  
-//                     '<button id="btnDelete" data-search="' + task.TaskID + '"class="btn btn-danger" type="button">Delete</button>' + 
-//                 '</div>' +
-//             '</td>' +
-//         '</tr>'
-//     );
+// $('#btnEnvGet').on('click',function(){
+//     $('#tblEnv tbody').empty()
+//     getEnv(100)
 // })
-
-
