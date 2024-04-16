@@ -15,9 +15,6 @@
 // Required Parameters: SessionID, days
 // Expected Returns: An array of JSON objects with all environment record details
 
-
-//make a table for the entries
-
 function getRandomObservationDatetime() {
     // Get the current date
     var currentDate = new Date();
@@ -73,7 +70,7 @@ function getEnv(d){
             // loops through all logs and puts them into a table 
             result.forEach(element => {
                 let strHTML = 
-                '<tr data-id="' + element.LogID + '" class="table-success">' + 
+                '<tr id="' + element.LogID + '" class="table-success">' + 
                     '<td>' +  element.ObservationDateTime +
                     ' </td>' +
                     '<td>' +
@@ -87,7 +84,7 @@ function getEnv(d){
                         '</div>' +
                     '</td>' +
                     '<td>' + 
-                        '<button class="btn btn-danger bi-trash" type="button" onclick="deleteData(this)"></button>' +
+                        '<button id="btnDeleteEnv" class="btn btn-danger bi-trash" type="button"></button>' +
                     '</td>' +
                     
                 '</tr>';
@@ -111,23 +108,22 @@ function getEnv(d){
     });
 }
 
-function deleteData(button) { 
-            
-    // Get the parent row of the clicked button 
-    let row = button.parentNode.parentNode; 
-
-    // Remove the row from the table 
-    row.parentNode.removeChild(row); 
-
+$(document).on('click','#btnDeleteEnv',function(){
+    id = $(this).parent().parent().attr('id')
+    let row = $(this).parent().parent(); 
     session = sessionStorage.getItem('SessionID');
-    id = $(this).data('id')
+    console.log(id)
     $.ajax({
         url:'https://simplecoop.swollenhippo.com/environment.php',
         data: {SessionID:session, LogID:id },
         type: 'DELETE',
         success: function(result){
-            console.log(result.Outcome);
+            console.log(result);
             // $("#tblEnv").ajax.reload();
+
+            // Remove the row from the table 
+            row.empty(); 
+
         },
         error: function(result){
             Swal.fire({
@@ -137,19 +133,11 @@ function deleteData(button) {
             })
         }
     })
-}
-
-$('#btnDeleteEnv').on('click',function(){
-    console.log('delete clicked')
-    
-});
+})
 
 // creates table and displays it 
 getEnv(100)
 
 //make sure to call the getEnv() function when dashboard is first loaded 
 
-// $('#btnEnvGet').on('click',function(){
-//     $('#tblEnv tbody').empty()
-//     getEnv(100)
-// })
+
