@@ -11,94 +11,27 @@ function getRandomObservationDatetime() {
     return observationDatetime;
 }
 
-function deleteEggs(){
-    let successDelete = false;
-    $.ajax({
-        url:'https://simplecoop.swollenhippo.com/eggs.php',
-        data:{SessionID:sessionStorage.getItem('SessionID')},
-        type: 'DELETE',
-        success: function(result){
-            console.log(result);
-            successDelete = true;
-        }
-    })
-    return successDelete;
-}
-
-function getEggCount() {
-    let intEggCount = 0;
-
-    $.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), days:100}, function(result) {
-        console.log(result);
-
-        result.forEach(function(eggRecord, index) {
-            intEggCount += eggRecord.Harvested;
-        })
-    })
-
-    console.log(intEggCount);
-
-    return intEggCount;
-}
-
 function getEggTable() {
     $.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), days:100}, function(result) {
         result.forEach(function(eggRecord) {
-            $('#tblEgg tbody').append('<tr><td>' + eggRecord.LogDateTime + '</td><td>' + eggRecord.Harvested + '</td><td><button class="btn btn-danger col-12 btnDeleteEgg" type="button" data-search="' + eggRecord.LogID + '">Delete</button></td></tr>');
+            eggTable.row.add([eggRecord.LogDateTime, eggRecord.Harvested, '<button class="btn btn-danger btnDeleteEgg bi-trash" type="button" data-search="' + eggRecord.LogID + '"></button>']).draw();
         })
     })
-
-    $(document).ready(function(){
-        $('#tblEnv').dataTable();
-    });
 }
 
-$.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), days:100}, function(result) {
-    let intEggCount = 0;
-
-    result.forEach(function(eggRecord, index) {
-        intEggCount += eggRecord.Harvested;
-    })
-
-    $('#numTotalEggs').text(intEggCount);
-})
+var eggTable = new DataTable('#tblEgg');
 
 $('#btnHarvest').on('click', function() {
     let intEggHarvest = $('#numEggHarvest').val();
+    let randObs = getRandomObservationDatetime();
 
     if (intEggHarvest) {
-        $.post('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), observationDateTime:getRandomObservationDatetime(), eggs:intEggHarvest}, function(result) {
+        $.post('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), observationDateTime:randObs, eggs:intEggHarvest}, function(result) {
             result = JSON.parse(result);
             console.log(result);
+            eggTable.row.add([randObs, intEggHarvest, '<button class="btn btn-danger btnDeleteEgg bi-trash" type="button" data-search="' + result.LogID + '"></button>']).draw();
         })
     }
-
-    $.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), days:100}, function(result) {
-        console.log(result);
-        let intEggCount = 0;
-
-        result.forEach(function(eggRecord, index) {
-            intEggCount += eggRecord.Harvested;
-        })
-
-        $('#numTotalEggs').text(intEggCount);
-    })
-})
-
-$('#btnRefreshEgg').on('click', function() {
-    $.getJSON('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), days:100}, function(result) {
-        console.log(result);
-        let intEggCount = 0;
-
-        result.forEach(function(eggRecord, index) {
-            intEggCount += eggRecord.Harvested;
-        })
-
-        $('#numTotalEggs').text(intEggCount);
-    })
-
-    $('#tblEgg tbody tr').remove();
-    getEggTable();
 })
 
 $(document).on('click', '.btnDeleteEgg', function() {
@@ -111,8 +44,10 @@ $(document).on('click', '.btnDeleteEgg', function() {
         success:function(result) {
             console.log(result);
 
-            $('#tblEgg tbody tr').remove();
+            eggTable.rows().remove();
             getEggTable();
         }
     })
 })
+
+getEggTable();

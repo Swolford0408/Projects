@@ -160,29 +160,8 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex flex-column">
-                            <!-- <div>
-                                <div class="d-flex justify-content-center align-items-center flex-column">
-                                    <p>Inventory of eggs:</p>
-                                    <div class="container" style="position:relative; text-align:center; color:white;">
-                                        <img src="./otheregg.png" alt="Egg" width="90" height="80">
-                                        <p id="numTotalEggs" style="font-size: 32px; color: black; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);">0</p>
-                                    </div>
-                                </div>
-                                <form>
-                                    <div>
-                                        <div class="form-floating">
-                                            <input id="numEggHarvest" class="form-control" type="number" placeholder="Eggs Harvested" aria-label="Eggs Harvested">
-                                            <label for="numEggHarvest" class="form-label">Eggs Harvested</label>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-center align-items-center flex-row">
-                                        <button class="btn btn-primary col-6 mt-1" type="button" id="btnHarvest">Harvest</button>
-                                        <button class="btn btn-success col-6 mt-1" type="button" id="btnRefreshEgg">Refresh</button>
-                                    </div>
-                                </form>
-                            </div> -->
                             <div class="overflow-y-scroll">
-                                <table id="tblEgg" class="table table-striped display">
+                                <table id="tblEgg" class="table table-striped display" width="100%">
                                     <thead>
                                         <tr>
                                             <th scope="col">Date</th>
@@ -197,13 +176,12 @@
                             </div>
                             <div>
                                 <form>
-                                    <div class="form-floating">
-                                        <input id="numEggHarvest" class="form-control" type="number" placeholder="Eggs Harvested" aria-label="Eggs Harvested">
-                                        <label for="numEggHarvest" class="form-label">Eggs Harvested</label>
-                                    </div>
-                                    <div>
-                                        <button class="btn btn-primary col-6 mt-1" type="button" id="btnHarvest">Harvest</button>
-                                        <button class="btn btn-success col-6 mt-1" type="button" id="btnRefreshEgg">Refresh</button>
+                                    <div class="d-flex flex-row justify-content-center align-items-center">
+                                        <div class="form-floating">
+                                            <input id="numEggHarvest" class="form-control" type="number" placeholder="Eggs Harvested" aria-label="Eggs Harvested">
+                                            <label for="numEggHarvest" class="form-label">Eggs Harvested</label>
+                                        </div>
+                                        <button class="btn btn-primary mt-1 bi-egg-fill" type="button" id="btnHarvest">Harvest</button>
                                     </div>
                                 </form>
                             </div>
