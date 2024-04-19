@@ -79,6 +79,7 @@
                 $('#divDashboard').slideToggle(function(){
                     $('#divLogin').slideToggle();
                 })
+                eggTable.clear().draw(); // gets rid of egg table if user logs out in case a different user then logs in
             }else{
                 console.log("Failed to logout")
             }
