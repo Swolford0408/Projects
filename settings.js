@@ -13,6 +13,54 @@ $('#btnSettingsToggle').on('click',function(){
     }
 })
 
+// GLOBAL VARIABLES
+const strSettingsUrl = 'https://simplecoop.swollenhippo.com/settings.php';
+let intLastTimeChickensFed = null;
+
+// SETUP Variables
+$.getJSON(strSettingsUrl, {SessionID: sessionStorage.getItem('SessionID'), setting: 'TimeFed'}, (result)=>{
+    intLastTimeChickensFed = Number(result.Value);
+})
+
+// If it has been at least ten minutes since last time.
+if(Number(intLastTimeChickensFed) + 600000 < Date.now()){
+    $('#btnFeedChickens').removeClass('d-none');
+}else{
+    
+}
+
+const createTimer = (numTimeinMiliSec)=>{
+
+    const timeLeftObj = {
+        sec: Math.floor((numTimeinMiliSec % 60000) / 1000),
+        min: Math.floor(numTimeinMiliSec / 60000)
+    }
+
+    const timer = setInterval(()=>{
+        timeLeftObj.sec--;
+
+        if(timeLeftObj.sec < 0){
+            timeLeftObj.sec = 59;
+            timeLeftObj.min--;
+        }
+
+        if(timeLeftObj.min < 0){
+            $()
+            clearInterval(timer);
+        }else{
+            $('#paraFeedTime').html(`${timeLeftObj.min < 10 ? '0'+timeLeftObj.min : timeLeftObj.min }:${timeLeftObj.sec < 10 ? '0'+timeLeftObj.sec : timeLeftObj.sec}`)
+        }
+    }, 1000)
+
+    return timer
+}
+
+const feedChickens = ()=>{
+    const timer = createTimer(60000);
+
+    console.log(timer);
+}
+
 // Used to update the fan speed
 $(document).on('input', '#rangeFanSpeed', function() {
     $('#spanFanSpeed').html( `${$(this).val()} RPM` );
@@ -24,89 +72,12 @@ $('input[name="btnLightRadio"]').change(function() {
     console.log("Active radio button value: " + activeRadioValue);
 });
 
+$('#btnFeedChickens').on('click', feedChickens)
 
-$('#btnFeedChickens').on('click', function(){
-    // let storedTime = '';
-    // $.getJSON(strSettingsUrl, postObj, (result)=>{
-    // })  
-    const strSettingsUrl = 'https://simplecoop.swollenhippo.com/settings.php';
-
-    const postObj = {
-        SessionID:sessionStorage.getItem('SessionID'), 
-        setting: 'TimeFed',
-        value: `${Date.now()}`
-    }
-
-    console.log(postObj);
-
-    $.post(strSettingsUrl, postObj, (result)=>{
-        console.log(result);
-    });
-});
-
-let intervalID = null;
-
-const danceSong = new Audio('./audio_files/chickenDance.mp3');
-const images = [];
 $("#chickenParty").on('click', function(){
-    const htmlSettingsCard = document.getElementById("divSettings");
-
-    if(images.length > 0){
-        images.forEach((img)=>{
-            img.remove();
-        })
-    }
-    if(!danceSong.paused){
-        danceSong.pause();
-        clearInterval(intervalID);
-    }else{
-        danceSong.play();
-        
-        const numImages = 10;
-        
-        // Loop to create and position images
-        for (let i = 0; i < numImages; i++) {
-            // Create new image element
-            const img = new Image();
-            img.src = "./images/chicken.png"; // Set image source
     
-            // Get random position
-            const pos = getRandomPosition();
-
-            // Set image position
-            img.style.width = '200px'
-            img.style.height = '200px'
-            img.style.left = pos[0] + 'px';
-            img.style.top = pos[1] + 'px';
-            img.style.position = 'absolute';
-            img.style.transform = `rotate(${Math.random() * 360} deg)`;
     
-            // Append image to the body
-            document.body.appendChild(img);
-            images.push(img);
-        }
-
-        intervalID = setInterval(()=>{
-            party.confetti(htmlSettingsCard, {
-                count: party.variation.range(20, 40)
-            })
-
-            for(let i = 0; i < images.length; i++){
-                const pos = getRandomPosition();
-                images[i].style.left = pos[0] + 'px';
-                images[i].style.top = pos[1] + 'px';
-
-            }
-            
-        }, 1000)
-    }
 })
-
-function getRandomPosition() {
-    var x = Math.floor(Math.random() * window.innerWidth);
-    var y = Math.floor(Math.random() * window.innerHeight);
-    return [x, y];
-}
 
 
 // Used to quickly login to save development time
