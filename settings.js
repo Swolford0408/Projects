@@ -77,8 +77,11 @@ $('#btnFeedChickens').on('click', function(){
     $('#btnFeedChickens').slideToggle(function(){
         $('#paraFeedTime').slideToggle();
     })
+
     $('#paraFeedTime').html('10:00');
+
     createTimer(600000);
+    
     const objPutParams = {
         SessionID: sessionStorage.getItem('SessionID'), 
         setting: 'TimeFed', 
