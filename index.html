@@ -29,9 +29,10 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary col-12" type="button" id="btnLogin">Login</button> 
+                        <button class="btn btn-primary col-12" type="button" id="btnLogin">Login</button>
+                        <button class="btn btn-primary col-12 mt-2" type="button" id="btnDevLogin">DEV Login</button> 
                         <div class="col-12 d-flex justify-content-center">
-                            <a class="col-12 text-center btnToggle" data-card="Login">Need to Register? Click Here</a> 
+                            <a class="col-12 text-center btnToggle" data-card="Login"><span style="cursor:pointer">Need to Register? Click Here</span></a> 
                         </div>
                     </form>
                     
@@ -185,6 +186,7 @@
                 </div>
             </div>
 
+            <!-- DASHBOARD -->
             <div id="divDashboard" class="card" style="display: none;" data-card="dashboard">
                 <!-- EGG CARD -->
                 <div id="divEggs" class="card mb-2" data-card="eggs">
@@ -222,6 +224,37 @@
                     </div>
                 </div>
                 <button class="btn btn-danger col-12" type="button" id="btnLogOut">Log Out</button>
+                <button class="btn btn-primary col-12" type="button" id="btnSettingsToggle">Settings</button>
+            </div>
+
+            <!-- SETTINGS -->
+            <div id="divSettings" class="card col-12 col-md-8 col-lg-6"  style="display: none;" data-card="settings">
+                <div class="card-header">
+                    <h2 class="">Settings</h2>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-column">
+                        <div class="col-12 d-flex justify-content-between">
+                            <label class="form-label" for="rangeFanSpeed">Fan Speed</label>
+                            <p class="col-2 text-center d-inline" id="spanFanSpeed">300 RPM</p>
+                        </div>
+                        <input id="rangeFanSpeed" class="form-range" min="200" max="400" step="10" type="range" aria-label="Fan speed">
+                    </div>
+                    <div class="d-flex flex-column col-12">
+                        <p>Lights</p>
+                        <div class="btn-group" role="group" aria-label="Toggle lights">
+                            <input type="radio" class="btn-check" name="btnLightRadio" id="btnToggleLightsOn" value="On" autocomplete="off" checked>
+                            <label class="btn btn-outline-primary" for="btnToggleLightsOn">On</label>
+                          
+                            <input type="radio" class="btn-check" name="btnLightRadio" id="btnToggleLightsOff" value="Off" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="btnToggleLightsOff">Off</label>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column col-12">
+                        <input id="btnFeedChickens" class="btn btn-success my-2" type="button" value="Feed" aria-label="Feed Chickens">
+                        <p id="paraFeedTime" class="align-self-center">10:00</p>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -233,5 +266,6 @@
         <script src="./sessions.js"></script>
         <script src="./eggs.js"></script>
         <script src="./environment.js"></script>
+        <script src="./settings.js"></script>
     </body>
 </html>
