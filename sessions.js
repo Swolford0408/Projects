@@ -24,6 +24,7 @@ function createSession(strEmail,strPassword,type){
                     $('#divDashboard').slideToggle()
                 })
             }
+            getEggTable(); // when a new session is added, the egg table will be poulated accordingly
         }else{
             console.log(result);
             Swal.fire({
