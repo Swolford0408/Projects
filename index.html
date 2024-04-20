@@ -5,6 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SmartCoop</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">   
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     </head>
     <body class="bg-success">
         <div id="divMain" class="col-12 d-flex justify-content-center align-items-center min-vh-100">
@@ -153,15 +157,35 @@
                     </form>
                 </div>
             </div>
+
             <!--Environment card-->
-            <div id="divEnvironment" class="card col-12 col-md-8 col-lg-6">
+            <div id="divEnvironment" class="container card col-12 col-md-8 col-lg-6" style="">
                 <div class="card-header">
                     <h1 class="text-center">Environment</h1>
                 </div>
-                <div class="card-body">
-                   
+                <div id="divEnvTable" class="card-body">
+                    <div class="overflow-y-scroll">
+                        <table id="tblEnv" class="table table-striped display">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Date/Time</th>
+                                    <th scope="col">Tempurature</th>
+                                    <th scope="col">Humidity</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <button id="btnEnvAdd" class="btn btn-success" type="button">Record Data</button>
+                    <button id="btnEnvGet" class="btn btn-success" type="button">Get</button>
+                    
+
                 </div>
             </div>
+
             <div id="divDashboard" class="card" style="display: none;" data-card="dashboard">
                 <button class="btn btn-danger col-12" type="button" id="btnLogOut">Log Out</button>
             </div>
@@ -169,6 +193,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
         <script src="./validation.js"></script>
         <script src="./toggle.js"></script>
         <script src="./sessions.js"></script>
