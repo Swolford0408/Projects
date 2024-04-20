@@ -63,14 +63,18 @@
                 $('#divLogin').slideToggle(function(){
                     $('#divRegister').slideToggle();
                 })
-                if($(window).width() < 720){
-                    $('#divMain').removeClass('vh-100');
-                }
-            } else {
+            } else if (strCard == 'Register') {
                 $('#divRegister').slideToggle(function(){
                     $('#divLogin').slideToggle();
                 })
-                $('#divMain').addClass('vh-100');
+            } else if (strCard == 'welcomeLogin'){
+                $('#divStart').slideToggle(function(){
+                    $('#divLogin').slideToggle();
+                })
+            } else if (strCard == 'welcomeRegister'){
+                $('#divStart').slideToggle(function(){
+                    $('#divRegister').slideToggle();
+                })  
             }
         })
 
