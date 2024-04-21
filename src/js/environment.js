@@ -30,7 +30,7 @@ const getEnvData = ()=>{
     drawEnvTable(result);
 
     result.forEach((el)=>{
-        envTable.row.add([el.ObservationDateTime, el.Temperature, el.Humidity, `<button class="btn btn-danger" onClick="deleteEnvEntry('${el.LogID}')">Delete<button/>`]).draw()
+        envTable.row.add([el.ObservationDateTime, el.Temperature, el.Humidity, `<button class="btn btn-danger bi-trash" onClick="deleteEnvEntry('${el.LogID}')"></button>`]).draw()
     });
 });
 }
