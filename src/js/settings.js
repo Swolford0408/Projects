@@ -15,6 +15,8 @@ $('#btnSettingsToggle').on('click',function(){
 // Used to quickly login to save development time
 $('#btnDevLogin').on('click', function(){
     createSession("coop@example.com", "ASD123asd", "login");
+   $('#divDashBoard').slideToggle();
+   $('.navbar').slideToggle();
 })
 
 // Erik Bowling

@@ -65,8 +65,8 @@
             </div>
         </nav>
         <div class="bg-image main-content" style="background-image: url('src/img/field.jpg'); height: min-100vh; background-size: cover;">
-            <div class="col-12 d-flex justify-content-center justify-content-xxl-start align-items-center min-vh-100">
-                <div id="divStart" class="card border-success col-12 col-md-8 col-lg-5 offset-xxl-1">
+            <div class="col-12 d-flex justify-content-center align-items-center min-vh-100">
+                <div id="divStart" class="card border-success col-12 col-md-8 col-lg-5">
                     <div class="card-header bg-success">
                         <h1 class="text-center">Welcome to the Flock!</h1>
                     </div>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <!-- LOGIN CARD -->
-                <div id="divLogin" class="card border-success col-md-6 col-lg-4 offset-xxl-1" style="display: none;" data-card="login">
+                <div id="divLogin" class="card border-success col-md-6 col-lg-4" style="display: none;" data-card="login">
                     <div class="card-header bg-success">
                         <h2 class="text-center">Login</h2>
                     </div>
@@ -115,8 +115,8 @@
                                 </div>
                             </div>
     
-                            <button class="btn btn-success col-12 btnLogin" type="button" id="btnLogin">Login</button>
-                            <button class="btn btn-primary col-12 mt-2 btnLogin" type="button" id="btnDevLogin">DEV Login</button> 
+                            <button class="btn btn-success col-12" type="button" id="btnLogin">Login</button>
+                            <button class="btn btn-primary col-12 mt-2" type="button" id="btnDevLogin">DEV Login</button> 
                             <div class="col-12 d-flex justify-content-center">
                                 <a class="col-12 text-center btnToggle" data-card="Login"><span style="cursor:pointer">Need to Register? Click Here</span></a> 
                             </div>
@@ -126,7 +126,7 @@
                 </div>
     
                 <!-- REGISTER CARD -->
-                <div id="divRegister" class="card border-primary col-12 col-md-8 col-lg-6 ms-xxl-5" style="display:none;">
+                <div id="divRegister" class="card border-primary col-12 col-md-8 col-lg-6" style="display:none;">
                     <div class="card-header bg-primary mb-2">
                         <h2 class="text-center">Registration</h2>
                     </div>
@@ -244,76 +244,81 @@
                     </div>
                 </div>
 
-                <div id="divDashBoard" class="card" style="display: none;">
+                <div id="divDashBoard" class="card bg-success col-10" style="display: none;">
                     <div class="card-header">
                         <h3>DashBoard</h3>
                     </div>
                     <div class="card-body">
-                        <!-- EGG CARD -->
-                        <div id="divEggs" class="card mb-2" data-card="eggs">
-                            <div class="card-header">
-                                <h5 class="text-center">Eggs</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex flex-column">
-                                    <div class="overflow-y-scroll">
-                                        <table id="tblEgg" class="table table-striped display" width="100%">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Egg Count</th>
-                                                    <th scope="col"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="table-group-divider"></tbody>
-                                        </table>
-                                    </div>
-                                    <div>
-                                        <form>
-                                            <div class="d-flex flex-row justify-content-center align-items-center">
-                                                <div class="form-floating">
-                                                    <input id="numEggHarvest" class="form-control" type="number" placeholder="Eggs Harvested" aria-label="Eggs Harvested">
-                                                    <label for="numEggHarvest" class="form-label">Eggs Harvested</label>
+                        <div class="container-fluid">
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <!-- EGG CARD -->
+                                    <div id="divEggs" class="card border-warning" data-card="eggs">
+                                        <div class="card-header bg-warning">
+                                            <h3 class="text-center">Eggs</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column">
+                                                <div class="overflow-y-scroll">
+                                                    <table id="tblEgg" class="table table-striped display" width="100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Date</th>
+                                                                <th scope="col">Egg Count</th>
+                                                                <th scope="col"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="table-group-divider"></tbody>
+                                                    </table>
                                                 </div>
-                                                <button class="btn btn-primary mt-1 bi-egg-fill" type="button" id="btnHarvest">Harvest</button>
+                                                <div>
+                                                    <form>
+                                                        <div class="d-flex flex-row justify-content-center align-items-center">
+                                                            <div class="form-floating">
+                                                                <input id="numEggHarvest" class="form-control" type="number" placeholder="Eggs Harvested" aria-label="Eggs Harvested">
+                                                                <label for="numEggHarvest" class="form-label">Eggs Harvested</label>
+                                                            </div>
+                                                            <button class="btn btn-primary mt-1 bi-egg-fill" type="button" id="btnHarvest">Harvest</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <button class="btn btn-danger col-12" type="button" id="btnLogOut">Log Out</button>
-                                    <button class="btn btn-primary col-12" type="button" id="btnSettingsToggle">Settings</button>
+                                
+                                <div class="col-6">
+                                    <!--Environment card-->
+                                    <div id="divEnvironment" class="card border-warning">
+                                        <div class="card-header bg-warning">
+                                            <h3 class="text-center">Environment</h3>
+                                        </div>
+                                        <div id="divEnvTable" class="card-body">
+                                            <div class="overflow-y-scroll">
+                                                <table id="tblEnv" class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Date/Time</th>
+                                                            <th scope="col">Tempurature</th>
+                                                            <th scope="col">Humidity</th>
+                                                            <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="table-group-divider">
+                                                        
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div>
+                                                <button id="btnEnvAdd" class="btn btn-success" type="button">Record Data</button>
+                                                <button id="btnEnvGet" class="btn btn-success" type="button">Get</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                            
                             </div>
-                        </div>
-
-                        <!--Environment card-->
-                        <div id="divEnvironment" class="container card col-12 col-md-8 col-lg-6">
-                            <div class="card-header">
-                                <h3 class="text-center">Environment</h3>
-                            </div>
-                            <div id="divEnvTable" class="card-body">
-                                <div class="overflow-y-scroll">
-                                    <table id="tblEnv" class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Date/Time</th>
-                                                <th scope="col">Tempurature</th>
-                                                <th scope="col">Humidity</th>
-                                                <th scope="col"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="table-group-divider">
-                                            
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div>
-                                    <button id="btnEnvAdd" class="btn btn-success" type="button">Record Data</button>
-                                    <button id="btnEnvGet" class="btn btn-success" type="button">Get</button>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                       
                     </div>
                 </div>
         
@@ -357,7 +362,6 @@
         <script src="./src/js/sessions.js"></script>
         <script src="./src/js/eggs.js"></script>
         <script src="./src/js/environment.js"></script>
-        <script src="./src/js/sidebar.js"></script>
         <script src="./src/js/settings.js"></script>
     </body>
 </html>

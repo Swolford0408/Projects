@@ -7,6 +7,11 @@
                     if(result){
                         // create session
                         createSession(strEmail,strPassword, "login");
+
+                        $('#divLogin').slideToggle(function(){
+                            $('#divDashBoard').slideToggle();
+                            $('.navbar').slideToggle();
+                        })
                     } else{
                         Swal.fire({
                             icon:'error',
@@ -17,7 +22,7 @@
                 })
             }
         });
-        
+
         $('#btnRegister').on('click',function(){
             if(!validateRegistration()){
                 let strEmail = $('#txtRegisterEmail').val();
@@ -45,6 +50,10 @@
                         $.post('https://simplecoop.swollenhippo.com/useraddress.php',{Email:strEmail,Street1:strAddressOne,Street2:strAddressTwo,City:strCity,State:strState,ZIP:strZip},function(result){
                             result=JSON.parse(result);
                         })
+
+                        $('#divRegister').slideToggle(function(){
+                            $('#divDashBoard').slideToggle()
+                        })
                     } else{
                         Swal.fire({
                             icon:'error',
@@ -52,9 +61,6 @@
                             html: 'This email already has an account'
                         })
                     }
-                })
-                $('#divRegister').slideToggle(function(){
-                    $('#divDashBoard').slideToggle();
                 })
             }
         });
