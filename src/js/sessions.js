@@ -37,7 +37,7 @@ function validateSession(session){
         console.log(currentDate.getTime())
         console.log(sessionUsedDate.getTime())
         // if it has not been 15 min update date time
-        if((currentDate.getTime() - sessionUsedDate.getTime())/ (1000 * 60) <= 1){
+        if((currentDate.getTime() - sessionUsedDate.getTime())/ (1000 * 60) <= 15){
             console.log((currentDate.getTime() - sessionUsedDate.getTime())/ (1000 * 60))
             console.log(currentDate.getTime())
             console.log(sessionUsedDate.getTime())
