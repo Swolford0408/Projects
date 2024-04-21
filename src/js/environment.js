@@ -50,59 +50,65 @@ $.getJSON('https://simplecoop.swollenhippo.com/environment.php',{SessionID: sess
 });
 
 $('#btnEnvAdd').on('click', ()=>{
+    getSession(function(session){
+        if(!validateSession(session)){
+            $('#liLogout').click();
+        }else{
+            let numHumidity = $('#inpEnvAddHumidity').val();
+            let numTemperature = $('#inpEnvAddTemperature').val();
+            let errStr = "";
+        
+            // Check if user entered anything
+            if(numHumidity === "" || numTemperature === "") errStr += "<p>Both fields need to be filled.</p>";
+        
+            // Try converting inputs to numbers
+            try{ numHumidity = Number(numHumidity); }
+            catch(err){
+                console.log(err);
+                errStr += "<p>Humidity must be a number</p>"; 
+            }
+        
+            try{ numTemperature = Number(numTemperature); }
+            catch(err){
+                console.log(err);
+                errStr += "<p>Temperature must be a number</p>"; 
+            }
+        
+            // Check if valid range for humidity
+            if(numHumidity < 0 || numHumidity > 100){
+                errStr += "<p>Humidity can only be a number between 0 and 100</p>";
+            }
+        
+            // If any error occurred above, fire swal and exit function
+            if(errStr){
+                Swal.fire({
+                    icon:'error',
+                    title:'Oops',
+                    html: errStr 
+                });
+        
+                return;
+            }
+        
+            // Else, continue with request
+            const requestData = {
+                SessionID: sessionStorage.getItem('SessionID'),
+                temperature: numTemperature,
+                observationDateTime: new Date(),
+                humidity: numHumidity
+            };
+        
+            $.post('https://simplecoop.swollenhippo.com/environment.php', requestData, function(result) {
+                result = JSON.parse(result);
+                Swal.fire({
+                    icon:'success',
+                    title:'Successfully Added',
+                    html: `<p>${result.Outcome}</p>`
+                });
+            });
+        }
+    })
 
-    let numHumidity = $('#inpEnvAddHumidity').val();
-    let numTemperature = $('#inpEnvAddTemperature').val();
-    let errStr = "";
-
-    // Check if user entered anything
-    if(numHumidity === "" || numTemperature === "") errStr += "<p>Both fields need to be filled.</p>";
-
-    // Try converting inputs to numbers
-    try{ numHumidity = Number(numHumidity); }
-    catch(err){
-        console.log(err);
-        errStr += "<p>Humidity must be a number</p>"; 
-    }
-
-    try{ numTemperature = Number(numTemperature); }
-    catch(err){
-        console.log(err);
-        errStr += "<p>Temperature must be a number</p>"; 
-    }
-
-    // Check if valid range for humidity
-    if(numHumidity < 0 || numHumidity > 100){
-        errStr += "<p>Humidity can only be a number between 0 and 100</p>";
-    }
-
-    // If any error occurred above, fire swal and exit function
-    if(errStr){
-        Swal.fire({
-            icon:'error',
-            title:'Oops',
-            html: errStr 
-        });
-
-        return;
-    }
-
-    // Else, continue with request
-    const requestData = {
-        SessionID: sessionStorage.getItem('SessionID'),
-        temperature: numTemperature,
-        observationDateTime: new Date(),
-        humidity: numHumidity
-    };
-
-    $.post('https://simplecoop.swollenhippo.com/environment.php', requestData, function(result) {
-        result = JSON.parse(result);
-        Swal.fire({
-            icon:'success',
-            title:'Successfully Added',
-            html: `<p>${result.Outcome}</p>`
-        });
-    });
 })
 
 // DELETE SYNTAX IF NEEDED

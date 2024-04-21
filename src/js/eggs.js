@@ -51,29 +51,41 @@ var eggTable = new DataTable('#tblEgg', {pageLength:10});
 $('#btnHarvest').on('click', function() {
     let intEggHarvest = $('#numEggHarvest').val();
     let strDateHarvest = document.querySelector('input[id="txtDateHarvest"]').value;
+    getSession(function(session){
+        if(!validateSession(session)){
+            $('#liLogout').click();
+        }else{
+            if (intEggHarvest && strDateHarvest) {
+                let strISODate = new Date(strDateHarvest).toISOString();
+                $.post('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), observationDateTime:strISODate, eggs:intEggHarvest}, function(result) {
+                    result = JSON.parse(result);
+                    eggTable.row.add([strISODate.slice(0, 10), intEggHarvest, '<button class="btn btn-danger btnDeleteEgg bi-trash" type="button" data-search="' + result.LogID + '"></button>']).draw();
+                })
+            }
+        }
+    })
 
-    if (intEggHarvest && strDateHarvest) {
-        let strISODate = new Date(strDateHarvest).toISOString();
-        $.post('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), observationDateTime:strISODate, eggs:intEggHarvest}, function(result) {
-            result = JSON.parse(result);
-            eggTable.row.add([strISODate.slice(0, 10), intEggHarvest, '<button class="btn btn-danger btnDeleteEgg bi-trash" type="button" data-search="' + result.LogID + '"></button>']).draw();
-        })
-    }
 })
 
 // user clicks delete button in row and it gets rid of egg count for that day
 $(document).on('click', '.btnDeleteEgg', function() {
     let strLogID = $(this).attr('data-search');
-
-    $.ajax({
-        url:'https://simplecoop.swollenhippo.com/eggs.php',
-        data:{SessionID:sessionStorage.getItem('SessionID'), logID:strLogID},
-        type:'DELETE',
-        success:function() {
-            eggTable.clear().draw();
-            getEggTable();
+    getSession(function(session){
+        if(!validateSession(session)){
+            $('#liLogout').click();
+        }else{
+            $.ajax({
+                url:'https://simplecoop.swollenhippo.com/eggs.php',
+                data:{SessionID:sessionStorage.getItem('SessionID'), logID:strLogID},
+                type:'DELETE',
+                success:function() {
+                    eggTable.clear().draw();
+                    getEggTable();
+                }
+            })
         }
     })
+
 })
 
 // auto loads egg table if there is already a sesssion id
