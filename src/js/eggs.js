@@ -15,9 +15,6 @@ function getEggTable() {
     })
 }
 
-// DataTable object of eggs
-var eggTable = new DataTable('#tblEgg', {pageLength:10});
-
 // user enters number of eggs harvested on a random date
 $('#btnHarvest').on('click', function() {
     let intEggHarvest = $('#numEggHarvest').val();
