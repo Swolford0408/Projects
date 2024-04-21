@@ -15,40 +15,27 @@
 // Required Parameters: SessionID, days
 // Expected Returns: An array of JSON objects with all environment record details
 
-// Uses Chart.js to show the last 30 entries in the environment DB table
+// DATA TABLE
+const envTable = new DataTable('#tblEnv', {pageLength:5});
+var envChart = new Chart($('#canvEnv'), {});
 
-$.getJSON('https://simplecoop.swollenhippo.com/environment.php',{SessionID: sessionStorage.getItem('SessionID'), days: 100},function(result){
+// Uses Chart.js to show the last 30 entries in the environment DB table
+const getEnvData = ()=>{
+    $.getJSON('https://simplecoop.swollenhippo.com/environment.php',{SessionID: sessionStorage.getItem('SessionID'), days: 100},function(result){
     // Sort results by date
     result.sort((a,b)=>{
         return new Date(a.ObservationDateTime) - new Date(b.ObservationDateTime);
     })
 
-    // Grab the first 30 entries and create arrays
-    const arrSubset = result.reverse().slice(0, 30).reverse();
-    const arrDates = arrSubset.map(obj => new Date(obj.ObservationDateTime).toLocaleString('default', { month: 'long', day: 'numeric' }));
-    const arrTemps = arrSubset.map(obj => obj.Temperature);
-    const arrHumidities = arrSubset.map(obj => obj.Humidity);
+    drawEnvTable(result);
 
-    const mixedChart = new Chart($('#canvEnv'), {
-        data: {
-            datasets: [{
-                type: 'line',
-                label: 'Temperature',
-                data: arrTemps
-            }, {
-                type: 'line',
-                label: 'Humidity',
-                data: arrHumidities
-            }],
-            labels: arrDates
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-        }
+    result.forEach((el)=>{
+        envTable.row.add([el.ObservationDateTime, el.Temperature, el.Humidity, `<button class="btn btn-danger" onClick="deleteEnvEntry('${el.LogID}')">Delete<button/>`]).draw()
     });
 });
+}
 
+// ADD ENV ENTRY
 $('#btnEnvAdd').on('click', ()=>{
 
     let numHumidity = $('#inpEnvAddHumidity').val();
@@ -103,15 +90,51 @@ $('#btnEnvAdd').on('click', ()=>{
             html: `<p>${result.Outcome}</p>`
         });
     });
-})
+});
 
-// DELETE SYNTAX IF NEEDED
+// DELETE entry
+const deleteEnvEntry = (id)=>{
+    $.ajax({
+        url:'https://simplecoop.swollenhippo.com/environment.php',
+        data: {SessionID:sessionStorage.getItem("SessionID"), LogID:id },
+        type: 'DELETE',
+        success: function(result){
+            console.log(result);
+            envTable.clear().draw();
+            getEnvData();
+        }
+    });
 
-// $.ajax({
-//     url:'https://simplecoop.swollenhippo.com/environment.php',
-//     data: {SessionID:session, LogID:id },
-//     type: 'DELETE',
-//     success: function(result){
 
-//     }
-// });
+}
+
+const drawEnvTable = (arrValues)=>{
+    // Grab the first 30 entries and create arrays
+    const arrSubset = arrValues.reverse().slice(0, 30).reverse();
+    const arrDates = arrSubset.map(obj => new Date(obj.ObservationDateTime).toLocaleString('default', { month: 'long', day: 'numeric' }));
+    const arrTemps = arrSubset.map(obj => obj.Temperature);
+    const arrHumidities = arrSubset.map(obj => obj.Humidity);
+
+    console.log("here");
+    envChart.destroy();
+    envChart = new Chart($('#canvEnv'), {
+        data: {
+            datasets: [{
+                type: 'line',
+                label: 'Temperature',
+                data: arrTemps
+            }, {
+                type: 'line',
+                label: 'Humidity',
+                data: arrHumidities
+            }],
+            labels: arrDates
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+        }
+    });
+}
+
+getEnvData();
