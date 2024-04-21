@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-light bg-success d-flex justify-content-center">
+        <nav class="navbar navbar-expand-md navbar-light bg-success" style="display: none;">
             <div class="container-fluid">
                 <a href="#" class="navbar-brand">
                     <i class="lni lni-home me-1"></i>
@@ -62,13 +62,9 @@
                         </li>
                     </ul>
                 </div>
-                <form class="d-flex">
-                    <button id="btnWelcomeLogin" class="btn btn-warning btnToggle col-5 me-2" type="button" data-card="welcomeLogin">Login</button>
-                    <button id="btnWelcomeRegister" class="btn btn-warning btnToggle col-7" type="button" data-card="welcomeRegister">Register</button>
-                </form>
             </div>
         </nav>
-        <div class="bg-image main-content" style="background-image: url('src/field.jpg'); height: min-100vh; background-size: cover;">
+        <div class="bg-image main-content" style="background-image: url('src/img/field.jpg'); height: min-100vh; background-size: cover;">
             <div class="col-12 d-flex justify-content-center justify-content-xxl-start align-items-center min-vh-100">
                 <div id="divStart" class="card border-success col-12 col-md-8 col-lg-5 offset-xxl-1">
                     <div class="card-header bg-success">
@@ -76,7 +72,7 @@
                     </div>
                     <div class="card-body">
                         <div class="container d-flex justify-content-center">
-                            <img src="src/chicken_coop.jpg">
+                            <img src="src/img/chicken_coop.jpg">
                         </div>
                         <p class="fs-5 text-center mt-5 p-3">
                             We thank you for considering CoopTacular. 
@@ -248,8 +244,46 @@
                     </div>
                 </div>
 
+                <!-- EGG CARD -->
+                <div id="divEggs" class="card mb-2" data-card="eggs" style="display: none;">
+                    <div class="card-header">
+                        <h5 class="text-center">Eggs</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex flex-column">
+                            <div class="overflow-y-scroll">
+                                <table id="tblEgg" class="table table-striped display" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Egg Count</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider"></tbody>
+                                </table>
+                            </div>
+                            <div>
+                                <form>
+                                    <div class="d-flex flex-row justify-content-center align-items-center">
+                                        <div class="form-floating">
+                                            <input id="numEggHarvest" class="form-control" type="number" placeholder="Eggs Harvested" aria-label="Eggs Harvested">
+                                            <label for="numEggHarvest" class="form-label">Eggs Harvested</label>
+                                        </div>
+                                        <button class="btn btn-primary mt-1 bi-egg-fill" type="button" id="btnHarvest">Harvest</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        </div>
+                            <button class="btn btn-danger col-12" type="button" id="btnLogOut">Log Out</button>
+                            <button class="btn btn-primary col-12" type="button" id="btnSettingsToggle">Settings</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!--Environment card-->
-                <div id="divEnvironment" class="container card col-12 col-md-8 col-lg-6" style="" style="display: none;">
+                <div id="divEnvironment" class="container card col-12 col-md-8 col-lg-6" style="display: none;">
                     <div class="card-header">
                         <h3 class="text-center">Environment</h3>
                     </div>
@@ -269,82 +303,39 @@
                             </tbody>
                         </table>
                     </div>
-                    <button id="btnEnvAdd" class="btn btn-success" type="button">Record Data</button>
-                    <button id="btnEnvGet" class="btn btn-success" type="button">Get</button>
-                    
-    
+                        <button id="btnEnvAdd" class="btn btn-success" type="button">Record Data</button>
+                        <button id="btnEnvGet" class="btn btn-success" type="button">Get</button>
                     </div>
                 </div>
 
-            <!-- DASHBOARD -->
-                <div id="divDashboard" class="card" style="display: none;" data-card="dashboard">
-                <!-- EGG CARD -->
-                <div id="divEggs" class="card mb-2" data-card="eggs">
+                 <!-- SETTINGS -->
+                <div id="divSettings" class="card col-12 col-md-8 col-lg-6" data-card="settings" style="display: none;">
                     <div class="card-header">
-                        <h5 class="text-center">Eggs</h5>
+                        <h2 class="">Settings</h2>
                     </div>
                     <div class="card-body">
                         <div class="d-flex flex-column">
-                            <div class="overflow-y-scroll">
-                                <table id="tblEgg" class="table table-striped display" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Egg Count</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-
-                                    </tbody>
-                                </table>
+                            <div class="col-12 d-flex justify-content-between">
+                                <label class="form-label" for="rangeFanSpeed">Fan Speed</label>
+                                <p class="col-2 text-center d-inline" id="spanFanSpeed">300 RPM</p>
                             </div>
-                            <div>
-                                <form>
-                                    <div class="d-flex flex-row justify-content-center align-items-center">
-                                        <div class="form-floating">
-                                            <input id="numEggHarvest" class="form-control" type="number" placeholder="Eggs Harvested" aria-label="Eggs Harvested">
-                                            <label for="numEggHarvest" class="form-label">Eggs Harvested</label>
-                                        </div>
-                                        <button class="btn btn-primary mt-1 bi-egg-fill" type="button" id="btnHarvest">Harvest</button>
-                                    </div>
-                                </form>
+                            <input id="rangeFanSpeed" class="form-range" min="200" max="400" step="10" type="range" aria-label="Fan speed">
+                        </div>
+                        <div class="d-flex flex-column col-12">
+                            <p>Lights</p>
+                            <div class="btn-group" role="group" aria-label="Toggle lights">
+                                <input type="radio" class="btn-check" name="btnLightRadio" id="btnToggleLightsOn" value="On" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary" for="btnToggleLightsOn">On</label>
+                            
+                                <input type="radio" class="btn-check" name="btnLightRadio" id="btnToggleLightsOff" value="Off" autocomplete="off">
+                                <label class="btn btn-outline-danger" for="btnToggleLightsOff">Off</label>
                             </div>
                         </div>
-                    </div>
-                </div>
-                    <button class="btn btn-danger col-12" type="button" id="btnLogOut">Log Out</button>
-                <button class="btn btn-primary col-12" type="button" id="btnSettingsToggle">Settings</button>
-            </div>
-
-            <!-- SETTINGS -->
-            <div id="divSettings" class="card col-12 col-md-8 col-lg-6"  style="display: none;" data-card="settings">
-                <div class="card-header">
-                    <h2 class="">Settings</h2>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex flex-column">
-                        <div class="col-12 d-flex justify-content-between">
-                            <label class="form-label" for="rangeFanSpeed">Fan Speed</label>
-                            <p class="col-2 text-center d-inline" id="spanFanSpeed">300 RPM</p>
-                        </div>
-                        <input id="rangeFanSpeed" class="form-range" min="200" max="400" step="10" type="range" aria-label="Fan speed">
-                    </div>
-                    <div class="d-flex flex-column col-12">
-                        <p>Lights</p>
-                        <div class="btn-group" role="group" aria-label="Toggle lights">
-                            <input type="radio" class="btn-check" name="btnLightRadio" id="btnToggleLightsOn" value="On" autocomplete="off" checked>
-                            <label class="btn btn-outline-primary" for="btnToggleLightsOn">On</label>
-                          
-                            <input type="radio" class="btn-check" name="btnLightRadio" id="btnToggleLightsOff" value="Off" autocomplete="off">
-                            <label class="btn btn-outline-danger" for="btnToggleLightsOff">Off</label>
+                        <div class="d-flex flex-column col-12">
+                            <input id="btnFeedChickens" class="btn btn-success my-2" type="button" value="Feed" aria-label="Feed Chickens">
+                            <p id="paraFeedTime" class="align-self-center">10:00</p>
                         </div>
                     </div>
-                    <div class="d-flex flex-column col-12">
-                        <input id="btnFeedChickens" class="btn btn-success my-2" type="button" value="Feed" aria-label="Feed Chickens">
-                        <p id="paraFeedTime" class="align-self-center">10:00</p>
-                    </div>
-                </div>
                 </div>
             </div>
         </div>
