@@ -55,28 +55,35 @@ const createTimer = (numTimeinMiliSec)=>{
 }
 
 $('#btnFeedChickens').on('click', function(){
-    $('#btnFeedChickens').slideToggle(function(){
-        $('#paraFeedTime').slideToggle();
-    })
-
-    $('#paraFeedTime').html('10:00');
-
-    createTimer(600000);
-    
-    const objPutParams = {
-        SessionID: sessionStorage.getItem('SessionID'), 
-        setting: 'TimeFed', 
-        value: Date.now()
-    }
-
-    $.ajax({
-        url: strSettingsUrl,
-        type: 'PUT',
-        data: objPutParams,
-        success: function(result){
-            console.log(result)
+    getSession(function(session){
+        if(!validateSession(session)){
+            $('#liLogout').click();
+        }else{
+            $('#btnFeedChickens').slideToggle(function(){
+                $('#paraFeedTime').slideToggle();
+            })
+        
+            $('#paraFeedTime').html('10:00');
+        
+            createTimer(600000);
+            
+            const objPutParams = {
+                SessionID: sessionStorage.getItem('SessionID'), 
+                setting: 'TimeFed', 
+                value: Date.now()
+            }
+        
+            $.ajax({
+                url: strSettingsUrl,
+                type: 'PUT',
+                data: objPutParams,
+                success: function(result){
+                    console.log(result)
+                }
+            });
         }
-    });
+    })
+    
 });
 
 /////////////////////////////////////////////

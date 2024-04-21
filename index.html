@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-light bg-success" style="display: none;">
+        <nav class="navbar navbar-expand-md bg-white" style="display: none;">
             <div class="container-fluid">
                 <a href="#" class="navbar-brand">
                     <i class="lni lni-home me-1"></i>
@@ -26,12 +26,6 @@
                             <a href="#" class="nav-link active">
                                 <i class="lni lni-agenda"></i>
                                 <span>DashBoard</span>
-                            </a>
-                        </li>
-                        <li id="liProfile" class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="lni lni-user"></i>
-                                <span>Profile</span>
                             </a>
                         </li>
                         <li id="liSettings" class="nav-item">
@@ -51,11 +45,10 @@
             </div>
         </nav>
 
-        
         <div class="bg-image main-content" style="background-image: url('src/img/field.jpg'); height: min-100vh; background-size: cover;">
             <div class="col-12 d-flex justify-content-center align-items-center min-vh-100">
-                <div id="divStart" class="card border-success col-12 col-md-8 col-lg-5">
-                    <div class="card-header bg-success">
+                <div id="divStart" class="card border-red col-12 col-md-8 col-lg-5">
+                    <div class="card-header bg-red">
                         <h1 class="text-center">Welcome to the Flock!</h1>
                     </div>
                     <div class="card-body">
@@ -75,19 +68,9 @@
                         </div>
                     </div>
                 </div>
-                <div id="coopID" class="card border-warning" style="display: none;">
-                    <div class="card-header border-warning">
-                        <h2 class="text-center">CoopID</h2>
-                    </div>
-                    <div class="card-body">
-                        <form>
-
-                        </form>
-                    </div>
-                </div>
                 <!-- LOGIN CARD -->
-                <div id="divLogin" class="card border-success col-md-6 col-lg-4" style="display: none;" data-card="login">
-                    <div class="card-header bg-success">
+                <div id="divLogin" class="card outline-red col-md-6 col-lg-4" style="display: none;" data-card="login">
+                    <div class="card-header bg-red">
                         <h2 class="text-center">Login</h2>
                     </div>
                     <div class="card-body">
@@ -113,8 +96,8 @@
                 </div>
     
                 <!-- REGISTER CARD -->
-                <div id="divRegister" class="card border-primary col-12 col-md-8 col-lg-6" style="display:none;">
-                    <div class="card-header bg-primary mb-2">
+                <div id="divRegister" class="card outline-red col-12 col-md-8 col-lg-6" style="display:none;">
+                    <div class="card-header bg-red mb-2">
                         <h2 class="text-center">Registration</h2>
                     </div>
                     <div class="card-body">
@@ -231,102 +214,165 @@
                     </div>
                 </div>
 
-                <div id="divDashBoard" class="card bg-success col-10" style="display: none;">
-                    <div class="card-header">
-                        <h3>DashBoard</h3>
+                <div id="divDashBoard" class="card outline-red col-12 col-md-10" style="display: none;">
+                    <div class="card-header bg-red">
+                        <h2 class="text-center">DashBoard</h2>
                     </div>
                     <div class="card-body">
                         <div class="container-fluid">
                             <div class="row g-3">
-                                <div class="col-6">
+                                <div class="col-12 col-md-6">
                                     <!-- EGG CARD -->
-                                    <div id="divEggs" class="card border-warning" data-card="eggs">
-                                        <div class="card-header bg-warning">
+                                    <div id="divEggs" class="card outline-yellow" data-card="eggs">
+                                        <div class="card-header bg-yellow">
                                             <h3 class="text-center">Eggs</h5>
                                         </div>
                                         <div class="card-body">
-                                            <canvas id="canvEggs"></canvas>
-                                            <div class="overflow-y-scroll">
-                                                <table id="tblEgg" class="table table-striped col-12">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">Egg Count</th>
-                                                            <th scope="col"></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="table-group-divider"></tbody>
-                                                </table>
-                                            </div>
-                                            <div>
-                                                <form>
-                                                    <div class="d-flex justify-content-around">
-                                                        <div class="form-floating col-3">
-                                                            <input id="numEggHarvest" class="form-control" type="number" placeholder="Eggs Harvested" aria-label="Eggs Harvested">
-                                                            <label for="numEggHarvest" class="form-label">Eggs Harvested</label>
-                                                        </div>
-                                                        <div class="form-floating col-3">
-                                                            <input id="txtDateHarvest" class="form-control" type="date" placeholder="Date Harvested" aria-label="Date Harvested">
-                                                            <label for="txtDateHarvest" class="form-label">Date Harvested</label>
-                                                        </div>
-                                                        <button class="btn btn-success btn-lg col-5 mt-1 bi-egg-fill" type="button" id="btnHarvest">Harvest</button>
+                                            <div class="accordion col-12" id="accEgg">
+                                                <div class="accordion-item">
+                                                    <h4 class="accordion-header">
+                                                        <button class="accordion-button bg-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#eggGraph" aria-expanded="true" aria-controls="eggGraph">
+                                                            Egg Graph
+                                                        </button>
+                                                    </h4>
+                                                    <div id="eggGraph" class="accordion-collapse collapse show">
+                                                        <div class="accordion-body">
+                                                            <canvas id="canvEggs"></canvas>
+                                                        </div> 
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h4 class="accordion-header">
+                                                        <button class="accordion-button bg-yellow collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eggTable" aria-expanded="false" aria-controls="eggTable">
+                                                            Egg Table
+                                                        </button>
+                                                    </h4>
+                                                    <div id="eggTable" class="accordion-collapse collapse">
+                                                        <div class="accordion-body">
+                                                            <div class="overflow-y-scroll">
+                                                                <table id="tblEgg" class="table table-striped" style="width: 100%;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Date</th>
+                                                                            <th scope="col">Egg Count</th>
+                                                                            <th scope="col"></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody class="table-group-divider"></tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h4 class="accordion-header">
+                                                        <button class="accordion-button bg-yellow collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eggAddEntry" aria-expanded="false" aria-controls="eggAddEntry">
+                                                            Add Entry?
+                                                        </button>   
+                                                    </h4>
+                                                    <div id="eggAddEntry" class="accordion-collapse collapse">
+                                                        <div class="accordion-body">
+                                                            <form class="container-fluid">
+                                                                <div class="row g-3">
+                                                                    <div class="col-12 col-md-6">
+                                                                        <div class="form-floating">
+                                                                            <input id="numEggHarvest" class="form-control" type="number" placeholder="Eggs Harvested" aria-label="Eggs Harvested">
+                                                                            <label for="numEggHarvest" class="form-label">Eggs Harvested</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-6">
+                                                                        <div class="form-floating">
+                                                                            <input id="txtDateHarvest" class="form-control" type="date" placeholder="Date Harvested" aria-label="Date Harvested">
+                                                                            <label for="txtDateHarvest" class="form-label">Date Harvested</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <button class="btn btn-success btn-lg col-12 bi-egg-fill" type="button" id="btnHarvest"> Harvest</button>
+                                                                    </div>    
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <div class="col-6">
+                                <div class="col-12 col-md-6">
                                     <!--Environment card-->
-                                    <div id="divEnvironment" class="card border-warning">
-                                        <div class="card-header bg-warning">
+                                    <div id="divEnvironment" class="card outline-yellow">
+                                        <div class="card-header bg-yellow">
                                             <h3 class="text-center">Environment</h3>
                                         </div>
                                         <div class="card-body">
-                                            <canvas id="canvEnv"></canvas>
-                                            <div class="col-6">
-                                                <h2 class="text-center">Add Entry?</h2>
-                                                <form class="" id="formEnvAddEntry">
-                                                    <div class="form-group col-12">
-                                                        <label class="form-label" for="inpEnvAddTemperature">Temperature</label>
-                                                        <input class="form-control" type="text" id="inpEnvAddTemperature" placeholder="Temperature">
+                                            <div class="accordion col-12" id="accEnvironment">
+                                                <div class="accordion-item">
+                                                    <h4 class="accordion-header">
+                                                        <button class="accordion-button bg-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#environmentGraph" aria-expanded="true" aria-controls="environmentGraph">
+                                                            Environment Graph
+                                                        </button>
+                                                    </h4>
+                                                    <div id="environmentGraph" class="accordion-collapse collapse show">
+                                                        <div class="accordion-body">
+                                                            <canvas id="canvEnv"></canvas>
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group col-12">
-                                                        <label class="form-label" for="inpEnvAddHumidity">Humidity</label>
-                                                        <input class="form-control" type="text" id="inpEnvAddHumidity" placeholder="Humidity">
+                                                </div>
+                                                <!-- <div class="accordion-item">
+                                                    <h4 class="accordion-header">
+                                                        <button class="accordion-button bg-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#environmentTable" aria-expanded="false" aria-controls="environmentTable">
+
+                                                        </button>
+                                                    </h4>
+                                                    <div id="environmentTable" class="accordion-collapse collapse">
+                                                        <div class="accordion-body">
+                                                            
+                                                        </div>
                                                     </div>
-                                                    <input class="btn btn-primary" id="btnEnvAdd" type="button" value="Add Entry">
-                                                </form>
+                                                </div> -->
+                                                <div class="accordion-item">
+                                                    <h4 class="accordion-header">
+                                                        <button class="accordion-button bg-yellow collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#environmentAddEntry" aria-expanded="false" aria-controls="environmentAdd">
+                                                            Add Entry?
+                                                        </button>
+                                                    </h4>
+                                                    <div id="environmentAddEntry" class="accordion-collapse collapse">
+                                                        <div class="accordion-body">
+                                                            <form class="container-fluid" id="formEnvAddEntry">
+                                                                <div class="row g-3">
+                                                                    <div class="col-12 col-md-6">
+                                                                        <div class="form-floating">
+                                                                            <input class="form-control" type="text" id="inpEnvAddTemperature" placeholder="Temperature">
+                                                                            <label class="form-label" for="inpEnvAddTemperature">Temperature</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-6">
+                                                                        <div class="form-floating">
+                                                                            <input class="form-control" type="text" id="inpEnvAddHumidity" placeholder="Humidity">
+                                                                            <label class="form-label" for="inpEnvAddHumidity">Humidity</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <button class="btn btn-success btn-lg col-12 bi bi-speedometer2" id="btnEnvAdd" type="button"> Add Entry</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="overflow-y-scroll">
-                                                <table id="tblEnv" class="table table-striped display">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Date/Time</th>
-                                                            <th scope="col">Tempurature</th>
-                                                            <th scope="col">Humidity</th>
-                                                            <th scope="col">Delete</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="tblEnvBody" class="table-group-divider">
-                                                        
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        
                                         </div>
                                     </div>
                                 </div>
-                            
                             </div>
                         </div>                       
                     </div>
                 </div>
         
                  <!-- SETTINGS -->
-                <div id="divSettings" class="card col-12 col-md-8 col-lg-6" data-card="settings" style="display: none;">
-                    <div class="card-header">
+                <div id="divSettings" class="card outline-red col-12 col-md-8 col-lg-6" data-card="settings" style="display: none;">
+                    <div class="card-header bg-red">
                         <h2 class="">Settings</h2>
                     </div>
                     <div class="card-body">
