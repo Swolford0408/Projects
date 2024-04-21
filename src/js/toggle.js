@@ -3,6 +3,8 @@ $('#liDashBoard').on('click', function(){
     // $('#divProfile').slideUp();
     $('#divSettings').slideUp();
     $('#divDashBoard').slideDown();
+    $('#liSettings a').removeClass("active");
+    $('#liDashBoard a').addClass("active");
 })
 
 // $('#liProfile').on('click', function(){
@@ -15,6 +17,8 @@ $('#liSettings').on('click', function(){
     // $('#divProfile').slideUp();
     $('#divSettings').slideDown();
     $('#divDashBoard').slideUp();
+    $('#liDashBoard a').removeClass("active");
+    $('#liSettings a').addClass("active");
 })
 
 $('#liLogout').on('click',function(){
@@ -23,8 +27,11 @@ $('#liLogout').on('click',function(){
         $('#divSettings').slideUp();
         $('#divDashBoard').slideUp();
         $('.navbar').slideUp();
-        $('#divStart').slideDown();
+        $('#divStart').slideDown()
         
+        $('#liSettings a').removeClass("active");
+        $('#liDashBoard a').addClass("active");
+
         eggTable.clear().draw(); // gets rid of egg table if user logs out in case a different user then logs in
     }else{
         console.log("Failed to logout")
