@@ -30,20 +30,12 @@ $('#btnHarvest').on('click', function() {
                 let strISODate = new Date(strDateHarvest).toISOString();
                 $.post('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), observationDateTime:strISODate, eggs:intEggHarvest}, function(result) {
                     result = JSON.parse(result);
-                    eggTable.row.add([strISODate.slice(0, 10), intEggHarvest, '<button class="btn btn-danger btnDeleteEgg bi-trash" type="button" data-search="' + result.LogID + '"></button>']).draw();
-                })
+                    eggTable.clear().draw();
+                    getEggTable();
+                });
             }
         }
     })
-  
-    if (intEggHarvest && strDateHarvest) {
-        let strISODate = new Date(strDateHarvest).toISOString();
-        $.post('https://simplecoop.swollenhippo.com/eggs.php', {SessionID:sessionStorage.getItem('SessionID'), observationDateTime:strISODate, eggs:intEggHarvest}, function(result) {
-            result = JSON.parse(result);
-            getEggTable();
-        });
-
-    }
 })
 
 // user clicks delete button in row and it gets rid of egg count for that day
