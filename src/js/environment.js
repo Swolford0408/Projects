@@ -15,129 +15,103 @@
 // Required Parameters: SessionID, days
 // Expected Returns: An array of JSON objects with all environment record details
 
-function getRandomObservationDatetime() {
-    // Get the current date
-    var currentDate = new Date();
-    // Generate a random number of days between 0 and 100
-    var randomDays = Math.floor(Math.random() * 101);
-    // Calculate the random date within the specified range
-    var randomDate = new Date(currentDate);
-    randomDate.setDate(currentDate.getDate() - randomDays);
-    // Format the date in ISO string format
-    var observationDatetime = randomDate.toISOString();
-        return observationDatetime;
-    }
+// Uses Chart.js to show the last 30 entries in the environment DB table
 
-function getRandomTemperature() {
-    // Generate a random temperature between 42 and 90
-    return Math.random() * (90 - 42) + 42;
-}
+$.getJSON('https://simplecoop.swollenhippo.com/environment.php',{SessionID: sessionStorage.getItem('SessionID'), days: 100},function(result){
+    // Sort results by date
+    result.sort((a,b)=>{
+        return new Date(a.ObservationDateTime) - new Date(b.ObservationDateTime);
+    })
 
-function getRandomHumidity() {
-    // Generate a random humidity between 30 and 98
-    return Math.random() * (98 - 30) + 30;
+    // Grab the first 30 entries and create arrays
+    const arrSubset = result.reverse().slice(0, 30).reverse();
+    const arrDates = arrSubset.map(obj => new Date(obj.ObservationDateTime).toLocaleString('default', { month: 'long', day: 'numeric' }));
+    const arrTemps = arrSubset.map(obj => obj.Temperature);
+    const arrHumidities = arrSubset.map(obj => obj.Humidity);
 
-}
-
-$('#btnEnvAdd').on('click',function(){
-    console.log('hello add edition')
-
-
-        // Loop to execute the code block 100 times
-    for (var i = 0; i < 100; i++) {
-        // The SessionID and additional data with random temperature, humidity, and observationdatetime
-        var requestData = {
-            SessionID: sessionStorage.getItem('SessionID'),
-            temperature: getRandomTemperature(),
-            observationDateTime: getRandomObservationDatetime(),
-            humidity: getRandomHumidity()
-        };
-
-        // Making the AJAX request using POST
-        $.post('https://simplecoop.swollenhippo.com/environment.php',requestData, function(result) {
-            console.log(result);
-        });
-    }
-
-})
-
-// pulls all logs and turns them into a data table
-function getEnv(d){
-    session = sessionStorage.getItem('SessionID');
-    $.getJSON('https://simplecoop.swollenhippo.com/environment.php',{SessionID: session, days: d},function(result){
-        console.log(result)
-        if(result.Outcome != false){
-            // loops through all logs and puts them into a table 
-            result.forEach(element => {
-                let strHTML = 
-                '<tr id="' + element.LogID + '" class="table-success">' + 
-                    '<td>' +  element.ObservationDateTime +
-                    ' </td>' +
-                    '<td>' +
-                        '<div class="progress">' +
-                            '<div class="progress-bar bg-danger" role="progressbar" style="width: '+ element.Temperature + '% " aria-valuenow="'+ element.Temperature + '" aria-valuemin="0" aria-valuemax="100">'+ element.Temperature + '&deg' +'</div>' +
-                        '</div>' + 
-                    '</td>' +
-                    '<td>' + 
-                        '<div class="progress">' +
-                            '<div class="progress-bar" role="progressbar" style="width: '+ element.Humidity + '% " aria-valuenow="'+ element.Humidity + '" aria-valuemin="0" aria-valuemax="100">'+ element.Humidity + '%' +'</div>' +
-                        '</div>' +
-                    '</td>' +
-                    '<td>' + 
-                        '<button id="btnDeleteEnv" class="btn btn-danger bi-trash" type="button"></button>' +
-                    '</td>' +
-                    
-                '</tr>';
-                $('#tblEnv tbody').append(strHTML)
-            });
-            // turns table into a data table to get the pages/search/# of results 
-            $(document).ready(function(){
-                $('#tblEnv').dataTable();
-            });  
-            
-            return;
-                  
-        }else {
-            Swal.fire({
-                icon:'error',
-                title:'Oops',
-                html: 'Error requesting Data'
-            })
-            return;
+    const mixedChart = new Chart($('#canvEnv'), {
+        data: {
+            datasets: [{
+                type: 'line',
+                label: 'Temperature',
+                data: arrTemps
+            }, {
+                type: 'line',
+                label: 'Humidity',
+                data: arrHumidities
+            }],
+            labels: arrDates
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
         }
     });
-}
+});
 
-$(document).on('click','#btnDeleteEnv',function(){
-    id = $(this).parent().parent().attr('id')
-    let row = $(this).parent().parent(); 
-    session = sessionStorage.getItem('SessionID');
-    console.log(id)
-    $.ajax({
-        url:'https://simplecoop.swollenhippo.com/environment.php',
-        data: {SessionID:session, LogID:id },
-        type: 'DELETE',
-        success: function(result){
-            console.log(result);
-            // $("#tblEnv").ajax.reload();
+$('#btnEnvAdd').on('click', ()=>{
 
-            // Remove the row from the table 
-            row.empty(); 
+    let numHumidity = $('#inpEnvAddHumidity').val();
+    let numTemperature = $('#inpEnvAddTemperature').val();
+    let errStr = "";
 
-        },
-        error: function(result){
-            Swal.fire({
-                icon:'error',
-                title:'Oops',
-                html: 'Error Deleting Data' + result.Outcome
-            })
-        }
-    })
+    // Check if user entered anything
+    if(numHumidity === "" || numTemperature === "") errStr += "<p>Both fields need to be filled.</p>";
+
+    // Try converting inputs to numbers
+    try{ numHumidity = Number(numHumidity); }
+    catch(err){
+        console.log(err);
+        errStr += "<p>Humidity must be a number</p>"; 
+    }
+
+    try{ numTemperature = Number(numTemperature); }
+    catch(err){
+        console.log(err);
+        errStr += "<p>Temperature must be a number</p>"; 
+    }
+
+    // Check if valid range for humidity
+    if(numHumidity < 0 || numHumidity > 100){
+        errStr += "<p>Humidity can only be a number between 0 and 100</p>";
+    }
+
+    // If any error occurred above, fire swal and exit function
+    if(errStr){
+        Swal.fire({
+            icon:'error',
+            title:'Oops',
+            html: errStr 
+        });
+
+        return;
+    }
+
+    // Else, continue with request
+    const requestData = {
+        SessionID: sessionStorage.getItem('SessionID'),
+        temperature: numTemperature,
+        observationDateTime: new Date(),
+        humidity: numHumidity
+    };
+
+    $.post('https://simplecoop.swollenhippo.com/environment.php', requestData, function(result) {
+        result = JSON.parse(result);
+        Swal.fire({
+            icon:'success',
+            title:'Successfully Added',
+            html: `<p>${result.Outcome}</p>`
+        });
+    });
 })
 
-// creates table and displays it 
-getEnv(100)
+// DELETE SYNTAX IF NEEDED
 
-//make sure to call the getEnv() function when dashboard is first loaded 
+// $.ajax({
+//     url:'https://simplecoop.swollenhippo.com/environment.php',
+//     data: {SessionID:session, LogID:id },
+//     type: 'DELETE',
+//     success: function(result){
 
-
+//     }
+// });
