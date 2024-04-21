@@ -53,7 +53,9 @@
                         })
                     }
                 })
-
+                $('#divRegister').slideToggle(function(){
+                    $('#divDashBoard').slideToggle();
+                })
             }
         });
         
