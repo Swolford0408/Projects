@@ -2,8 +2,9 @@
 $.getJSON('https://simplecoop.swollenhippo.com/sessions.php',{SessionID:sessionStorage.getItem('SessionID')},function(session){
     console.log(session);
     if(session != null){
-        $('#divLogin').slideUp(function(){
-            $('#divDashboard').slideDown();
+        $('#divStart').slideUp(function(){
+            $('#divDashBoard').slideDown();
+            $('.navbar').slideDown();
         })
     }
 })
@@ -17,11 +18,13 @@ function createSession(strEmail,strPassword,type){
             sessionStorage.setItem("SessionID",result.SessionID);
             if (type == "login"){
                 $('#divLogin').slideToggle(function(){
-                    $('#divDashboard').slideToggle()
+                    $('#divDashBoard').slideToggle()
+                    $('.navbar').slideDown();
                 })
             }else{
                 $('#divRegister').slideToggle(function(){
-                    $('#divDashboard').slideToggle()
+                    $('#divDashBoard').slideToggle()
+                    $('.navbar').slideDown();
                 })
             }
             getEggTable(); // when a new session is added, the egg table will be poulated accordingly
@@ -32,6 +35,8 @@ function createSession(strEmail,strPassword,type){
                 title:'Invalid Credentials',
                 html:'Your password or username is invalid.'
             })
+
+            return result;
         }
     })
 }
