@@ -112,20 +112,24 @@ $.getJSON(strSettingsUrl, {SessionID: sessionStorage.getItem('SessionID'), setti
 // Click of the radio on or off.
 $('input[name="btnLightRadio"]').change(function() {
     const activeRadioValue = $(this).val();
-
-    const objPutParams = {
-        SessionID: sessionStorage.getItem('SessionID'), 
-        setting: 'LightsOnOff', 
-        value: activeRadioValue
-    }
-
-    $.ajax({
-        url: strSettingsUrl,
-        type: 'PUT',
-        data: objPutParams,
-        success: function(result){
-            console.log(result)
+    getSession(function(session){
+        if(!validateSession(session)){
+            $('#liLogout').click();
+        }else{
+            const objPutParams = {
+            SessionID: sessionStorage.getItem('SessionID'), 
+            setting: 'LightsOnOff', 
+            value: activeRadioValue
         }
-    });
 
+        $.ajax({
+            url: strSettingsUrl,
+            type: 'PUT',
+            data: objPutParams,
+            success: function(result){
+                console.log(result)
+            }
+        });
+        }
+    })
 });
