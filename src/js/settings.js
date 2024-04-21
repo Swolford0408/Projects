@@ -1,22 +1,3 @@
-// Toggle to show settings card
-$('#btnSettingsToggle').on('click',function(){
-    const strCard = $(this).attr('data-card');
-    if(strCard === 'dashboard'){
-        $('#divSettings').slideToggle(function(){
-            $('#divDashboard').slideToggle();
-        })
-    } else {
-        $('#divDashboard').slideToggle(function(){
-            $('#divSettings').slideToggle();
-        })
-    }
-});
-
-// Used to quickly login to save development time
-$('#btnDevLogin').on('click', function(){
-    createSession("coop@example.com", "ASD123asd", "login");
-})
-
 // Erik Bowling
 // Smart Coop
 
