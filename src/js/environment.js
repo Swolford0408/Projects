@@ -173,7 +173,6 @@ const drawEnvTable = (arrValues)=>{
     const arrTemps = arrSubset.map(obj => obj.Temperature);
     const arrHumidities = arrSubset.map(obj => obj.Humidity);
 
-    console.log("here");
     envChart.destroy();
     envChart = new Chart($('#canvEnv'), {
         data: {

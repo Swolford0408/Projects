@@ -41,6 +41,7 @@ $('#liLogout').on('click',function(){
 $('#btnLogin').on('click',function(){
     let strEmail = $('#txtLoginUserName').val(); // "coop@example.com"
     let strPassword =  $('#txtLoginPassword').val(); // "ASD123asd"
+
     if(!validateLogin()){
         // check if the email has an account first
         $.getJSON('https://simplecoop.swollenhippo.com/users.php',{Email:strEmail}, function(result){
@@ -55,6 +56,9 @@ $('#btnLogin').on('click',function(){
                 })
             }
         })
+
+        $('#txtLoginUserName').val("");
+        $('#txtLoginPassword').val("");
     }
 });
 
@@ -95,6 +99,18 @@ $('#btnRegister').on('click',function(){
                 })
             }
         })
+
+        $('#txtRegisterEmail').val("");
+        $('#txtRegisterPassword').val("");
+        $('#txtRegisterFirstName').val("");
+        $('#txtRegisterLastName').val("");
+        $('#txtRegisterStreetAddress1').val("");
+        $('#txtRegisterStreetAddress2').val("");
+        $('#txtRegisterCity').val("");
+        $('#txtRegisterState').val("");
+        $('#txtRegisterZIP').val("");
+        $('#txtRegisterPhone').val("");
+        $('#txtRegisterCoopID').val("");
     }
 });
 

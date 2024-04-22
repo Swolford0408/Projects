@@ -15,7 +15,7 @@ function getEggTable() {
     })
 }
 
-// user enters number of eggs harvested on a random date
+// user enters number of eggs harvested
 $('#btnHarvest').on('click', function() {
     let intEggHarvest = $('#numEggHarvest').val();
     let strDateHarvest = document.querySelector('input[id="txtDateHarvest"]').value;
