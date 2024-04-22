@@ -400,9 +400,9 @@
                         <div class="d-flex flex-column">
                             <div class="col-12 d-flex justify-content-between">
                                 <label class="form-label" for="rangeFanSpeed">Fan Speed</label>
-                                <p class="col-2 text-center d-inline" id="spanFanSpeed">300 RPM</p>
+                                <p class="col-2 text-center d-inline" id="spanFanSpeed">700 RPM</p>
                             </div>
-                            <input id="rangeFanSpeed" class="form-range" min="200" max="400" step="10" type="range" aria-label="Fan speed">
+                            <input id="rangeFanSpeed" class="form-range" min="400" max="1000" step="10" type="range" aria-label="Fan speed">
                         </div>
                         <div class="d-flex flex-column col-12">
                             <p>Lights</p>
@@ -416,7 +416,10 @@
                         </div>
                         <div class="d-flex flex-column col-12">
                             <input id="btnFeedChickens" class="btn btn-success my-2" type="button" value="Feed" aria-label="Feed Chickens">
-                            <p id="paraFeedTime" class="align-self-center">10:00</p>
+                            <div id="feedOrNoFeed" class="text-center">
+                                <p>You can't feed the chickens again until the timer is up.</p>
+                                <h2 id="paraFeedTime" class="align-self-center">10:00</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
