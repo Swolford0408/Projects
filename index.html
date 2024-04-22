@@ -198,13 +198,22 @@
                                         <input id="txtRegisterPhone" class="form-control" type="tel" placeholder="Enter phone number" aria-label="Phone Number">
                                         <label for="txtRegisterPhone" class="form-label">Phone Number</label>
                                     </div>
-                                    <div class="form-floating col-md-6">
-                                        <input id="txtRegisterCoopID" class="form-control" type="text" placeholder="Enter coop registration ID" aria-label="Coop Registration ID">
-                                        <label for="txtRegisterCoopID" class="form-label">Coop Registration ID</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <div class="form-floating col-4">
+                                                <input id="txtRegisterCoopID" class="form-control" type="text" placeholder="Enter coop registration ID" aria-label="Coop Registration ID">
+                                                <label for="txtRegisterCoopID" class="form-label">Coop Registration ID</label>
+                                            </div>
+                                            <button class="btn btn-outline-warning col-2" type="button" id="btnGenerateCoopID"><i class="lni lni-reload" style="font-size: 1.5rem;"></i></button>
+                                        </div>
                                     </div>
-                                    <p>If you dont have a CoopID click here to generate</p>
-                                    <button class="btn btn-outline-warning" type="button" id="btnGenerateCoopID">Generate New CoopID</button>
-                                    <button class="btn btn-success col-12" type="button" id="btnRegister">Register</button>
+                                    <div class="d-flex justify-content-center col-12 offset-md-3">
+                                        <p>If you dont have a CoopID click the <span class="lni lni-reload"></span> to generate one</p>
+                                    </div>
+                                    <div class="justify-content-around">
+                                        <button class="btn btn-success col-12" type="button" id="btnRegister">Register</button>
+                                    </div>
+                                    
                                     <div class="col-12 d-flex justify-content-center">
                                         <a class="col-12 text-center btnToggle" data-card="Register">Already have an Account? Click Here</a> 
                                     </div>
@@ -319,18 +328,30 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="accordion-item">
+                                                <div class="accordion-item">
                                                     <h4 class="accordion-header">
-                                                        <button class="accordion-button bg-yellow" type="button" data-bs-toggle="collapse" data-bs-target="#environmentTable" aria-expanded="false" aria-controls="environmentTable">
-
+                                                        <button class="accordion-button bg-yellow collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#environmentTable" aria-expanded="false" aria-controls="environmentTable">
+                                                            Environment Table
                                                         </button>
                                                     </h4>
                                                     <div id="environmentTable" class="accordion-collapse collapse">
                                                         <div class="accordion-body">
-                                                            
+                                                            <div class="overflow-y-scroll">
+                                                                <table id="tblEnv" class="table table-striped" style="width: 100%;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col">Date/Time</th>
+                                                                            <th scope="col">Tempurature</th>
+                                                                            <th scope="col">Humidity</th>
+                                                                            <th scope="col"></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody class="table-group-divider"></tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div> -->
+                                                </div>
                                                 <div class="accordion-item">
                                                     <h4 class="accordion-header">
                                                         <button class="accordion-button bg-yellow collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#environmentAddEntry" aria-expanded="false" aria-controls="environmentAdd">
