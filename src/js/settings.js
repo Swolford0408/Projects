@@ -17,11 +17,11 @@ $.getJSON(strSettingsUrl, {SessionID: sessionStorage.getItem('SessionID'), setti
 
     if(intTimeLeft > 0){
         $('#btnFeedChickens').hide();
-        $('#paraFeedTime').show();
+        $('#feedOrNoFeed').show();
         createTimer(intTimeLeft);
     }else{
         $('#btnFeedChickens').show();
-        $('#paraFeedTime').hide();
+        $('#feedOrNoFeed').hide();
     }
 });
 
