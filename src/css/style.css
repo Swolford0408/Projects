@@ -59,3 +59,11 @@ body {
 .outline-dark-yellow {
     border-color: #977534;
 }
+
+.daytime-bg-image {
+    background-image: url('../img/field.jpg');
+}
+
+.nighttime-bg-image {
+    background-image: url('../img/night-farm.jpg');
+}
