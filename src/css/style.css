@@ -35,3 +35,11 @@ body {
 .outline-yellow {
     border-color: #ecb751;
 }
+
+.daytime-bg-image {
+    background-image: url('../img/field.jpg');
+}
+
+.nighttime-bg-image {
+    background-image: url('../img/night-farm.jpg');
+}
