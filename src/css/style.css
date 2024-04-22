@@ -35,3 +35,27 @@ body {
 .outline-yellow {
     border-color: #ecb751;
 }
+
+.bg-dark-white {
+    background-color: #aaaaa9;
+}
+
+.border-dark-white {
+    border-color: #aaaaa9;
+}
+
+.bg-dark-red {
+    background-color: #8a3036;
+}
+
+.outline-dark-red {
+    border-color: #8a3036;
+}
+
+.bg-dark-yellow {
+    background-color: #977534;
+}
+
+.outline-dark-yellow {
+    border-color: #977534;
+}
