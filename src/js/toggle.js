@@ -39,9 +39,9 @@ $('#liLogout').on('click',function(){
 })       
 //login action
 $('#btnLogin').on('click',function(){
-    let strEmail = "coop@example.com" //$('#txtLoginUserName').val();
-    let strPassword = "ASD123asd" //$('#txtLoginPassword').val();
-    //if(!validateLogin()){
+    let strEmail = $('#txtLoginUserName').val(); // "coop@example.com"
+    let strPassword =  $('#txtLoginPassword').val(); // "ASD123asd"
+    if(!validateLogin()){
         // check if the email has an account first
         $.getJSON('https://simplecoop.swollenhippo.com/users.php',{Email:strEmail}, function(result){
             if(result){
@@ -55,7 +55,7 @@ $('#btnLogin').on('click',function(){
                 })
             }
         })
-    //}
+    }
 });
 
 //Resgister Action
